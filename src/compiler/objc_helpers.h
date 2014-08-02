@@ -72,6 +72,7 @@ string ClassName(const EnumDescriptor* descriptor);
 string ClassName(const ServiceDescriptor* descriptor);
 
 string EnumValueName(const EnumValueDescriptor* descriptor);
+string EnumValueOriginalName(const EnumValueDescriptor* descriptor);
 
 string SafeName(const string& name);
 
@@ -109,7 +110,7 @@ string BoxValue(const FieldDescriptor* field, const string& value);
 
 const char* GetArrayValueType(const FieldDescriptor* field);
 
-bool isObjectArray(const FieldDescriptor* field);
+bool IsObjectArray(const FieldDescriptor* field);
 
 // Escape C++ trigraphs by escaping question marks to \?
 string EscapeTrigraphs(const string& to_escape);

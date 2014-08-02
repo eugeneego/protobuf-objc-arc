@@ -68,6 +68,7 @@ namespace google { namespace protobuf { namespace compiler { namespace objective
       "} $classname$;\n"
       "\n"
       "BOOL $classname$IsValidValue($classname$ value);\n"
+      "NSString *$classname$ToString($classname$ value);\n"
       "\n",
       "classname", ClassName(descriptor_));
   }
@@ -75,6 +76,12 @@ namespace google { namespace protobuf { namespace compiler { namespace objective
 
   void EnumGenerator::GenerateSource(io::Printer* printer) {
     printer->Print(
+      "BOOL $classname$IsValidValue($classname$ value) {\n"
+      "  return YES;\n"
+      "}\n\n",
+      "classname", ClassName(descriptor_));
+
+    /*printer->Print(
       "BOOL $classname$IsValidValue($classname$ value) {\n"
       "  switch (value) {\n",
       "classname", ClassName(descriptor_));
@@ -90,7 +97,26 @@ namespace google { namespace protobuf { namespace compiler { namespace objective
       "    default:\n"
       "      return NO;\n"
       "  }\n"
-      "}\n");
+      "}\n");*/
+
+    printer->Print(
+      "NSString *$classname$ToString($classname$ value) {\n"
+      "  switch (value) {\n",
+      "classname", ClassName(descriptor_));
+
+    for (int i = 0; i < canonical_values_.size(); i++) {
+      printer->Print(
+        "    case $name$:\n"
+        "      return @\"$value$\";\n",
+        "name", EnumValueName(canonical_values_[i]),
+        "value", EnumValueOriginalName(canonical_values_[i]));
+    }
+
+    printer->Print(
+      "    default:\n"
+      "      return [NSString stringWithFormat:@\"%d\", (int)value];\n"
+      "  }\n"
+      "}\n\n");
   }
 }  // namespace objectivec
 }  // namespace compiler

@@ -147,7 +147,7 @@ namespace google { namespace protobuf { namespace compiler { namespace objective
     }
 
 	if(descriptor_->is_repeated()){
-		if(isObjectArray(descriptor_)){
+		if(IsObjectArray(descriptor_)){
 			vars["default"] = string("[[NSArray alloc] init]");
 		}else{
 			vars["default"] = string("[PBArray arrayWithValueType:") + GetArrayValueType(descriptor_) + "]";

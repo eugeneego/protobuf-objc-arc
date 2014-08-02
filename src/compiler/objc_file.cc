@@ -48,7 +48,7 @@ namespace google { namespace protobuf { namespace compiler {namespace objectivec
     // hacky.  but this is how other generators determine if we're generating
     // the core ProtocolBuffers library
     if (file_->name() != "google/protobuf/descriptor.proto") {
-      printer->Print("#import <ProtocolBuffers/ProtocolBuffers.h>\n\n");
+      printer->Print("#import \"ProtocolBuffers.h\"\n\n");
     }
 
     if (file_->dependency_count() > 0) {
@@ -69,6 +69,7 @@ namespace google { namespace protobuf { namespace compiler {namespace objectivec
     }
 
     printer->Print(
+      "\n"
       "#ifndef __has_feature\n"
       "  #define __has_feature(x) 0 // Compatibility with non-clang compilers.\n"
       "#endif // __has_feature\n\n");
@@ -98,8 +99,8 @@ namespace google { namespace protobuf { namespace compiler {namespace objectivec
       "}\n");
 
     printer->Print(
-      "+ (PBExtensionRegistry*) extensionRegistry;\n"
-      "+ (void) registerAllExtensions:(PBMutableExtensionRegistry*) registry;\n");
+      "+ (PBExtensionRegistry*)extensionRegistry;\n"
+      "+ (void)registerAllExtensions:(PBMutableExtensionRegistry*) registry;\n");
 
     for (int i = 0; i < file_->extension_count(); i++) {
       ExtensionGenerator(classname_, file_->extension(i)).GenerateMembersHeader(printer);
@@ -146,7 +147,7 @@ namespace google { namespace protobuf { namespace compiler {namespace objectivec
       "header_file", header_file);
 
     printer->Print(
-      "@implementation $classname$\n",
+      "@implementation $classname$\n\n",
       "classname", classname_);
 
     for (int i = 0; i < file_->extension_count(); i++) {
@@ -158,12 +159,12 @@ namespace google { namespace protobuf { namespace compiler {namespace objectivec
     }
 
     printer->Print(
-      "static PBExtensionRegistry* extensionRegistry = nil;\n"
-      "+ (PBExtensionRegistry*) extensionRegistry {\n"
+      "static PBExtensionRegistry* extensionRegistry = nil;\n\n"
+      "+ (PBExtensionRegistry*)extensionRegistry {\n"
       "  return extensionRegistry;\n"
       "}\n"
       "\n"
-      "+ (void) initialize {\n"
+      "+ (void)initialize {\n"
       "  if (self == [$classname$ class]) {\n",
       "classname", classname_);
 
@@ -196,12 +197,12 @@ namespace google { namespace protobuf { namespace compiler {namespace objectivec
 
     printer->Print(
       "  }\n"
-      "}\n");
+      "}\n\n");
 
     // -----------------------------------------------------------------
 
     printer->Print(
-      "+ (void) registerAllExtensions:(PBMutableExtensionRegistry*) registry {\n");
+      "+ (void)registerAllExtensions:(PBMutableExtensionRegistry*)registry {\n");
     printer->Indent();
 
     for (int i = 0; i < file_->extension_count(); i++) {
@@ -216,7 +217,7 @@ namespace google { namespace protobuf { namespace compiler {namespace objectivec
 
     printer->Outdent();
     printer->Print(
-      "}\n");
+      "}\n\n");
 
     // -----------------------------------------------------------------
 
