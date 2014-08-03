@@ -26,98 +26,106 @@
 
 #include "objc_helpers.h"
 
-namespace google { namespace protobuf { namespace compiler { namespace objectivec {
+namespace google {
+namespace protobuf {
+namespace compiler {
+namespace objectivec {
 
-  EnumGenerator::EnumGenerator(const EnumDescriptor* descriptor)
-    : descriptor_(descriptor) {
-      for (int i = 0; i < descriptor_->value_count(); i++) {
-        const EnumValueDescriptor* value = descriptor_->value(i);
-        const EnumValueDescriptor* canonical_value =
-          descriptor_->FindValueByNumber(value->number());
+EnumGenerator::EnumGenerator(const EnumDescriptor *descriptor)
+  : descriptor_(descriptor)
+{
+  for(int i = 0; i < descriptor_->value_count(); i++) {
+    const EnumValueDescriptor *value = descriptor_->value(i);
+    const EnumValueDescriptor *canonical_value = descriptor_->FindValueByNumber(value->number());
 
-        if (value == canonical_value) {
-          canonical_values_.push_back(value);
-        } else {
-          Alias alias;
-          alias.value = value;
-          alias.canonical_value = canonical_value;
-          aliases_.push_back(alias);
-        }
-      }
-  }
-
-
-  EnumGenerator::~EnumGenerator() {
-  }
-
-
-  void EnumGenerator::GenerateHeader(io::Printer* printer) {
-    printer->Print(
-      "typedef enum {\n");
-    printer->Indent();
-    
-    for (int i = 0; i < canonical_values_.size(); i++) {
-      printer->Print(
-        "$name$ = $value$,\n",
-        "name", EnumValueName(canonical_values_[i]),
-        "value", SimpleItoa(canonical_values_[i]->number()));
+    if(value == canonical_value) {
+      canonical_values_.push_back(value);
+    } else {
+      Alias alias;
+      alias.value = value;
+      alias.canonical_value = canonical_value;
+      aliases_.push_back(alias);
     }
+  }
+}
 
-    printer->Outdent();
+
+EnumGenerator::~EnumGenerator()
+{
+}
+
+
+void EnumGenerator::GenerateHeader(io::Printer *printer)
+{
+  printer->Print(
+    "typedef enum {\n");
+  printer->Indent();
+
+  for(int i = 0; i < canonical_values_.size(); i++) {
     printer->Print(
-      "} $classname$;\n"
-      "\n"
-      "BOOL $classname$IsValidValue($classname$ value);\n"
-      "NSString *$classname$ToString($classname$ value);\n"
-      "\n",
-      "classname", ClassName(descriptor_));
+      "$name$ = $value$,\n",
+      "name", EnumValueName(canonical_values_[i]),
+      "value", SimpleItoa(canonical_values_[i]->number()));
   }
 
+  printer->Outdent();
+  printer->Print(
+    "} $classname$;\n"
+    "\n"
+    "BOOL $classname$IsValidValue($classname$ value);\n"
+    "NSString *$classname$ToString($classname$ value);\n"
+    "\n\n",
+    "classname", ClassName(descriptor_));
+}
 
-  void EnumGenerator::GenerateSource(io::Printer* printer) {
+
+void EnumGenerator::GenerateSource(io::Printer *printer)
+{
+  // no enum range checking
+  printer->Print(
+    "BOOL $classname$IsValidValue($classname$ value)\n{\n"
+    "  return YES;\n"
+    "}\n\n",
+    "classname", ClassName(descriptor_));
+
+  /*printer->Print(
+    "BOOL $classname$IsValidValue($classname$ value)\n{\n"
+    "  switch (value) {\n",
+    "classname", ClassName(descriptor_));
+
+  for(int i = 0; i < canonical_values_.size(); i++) {
     printer->Print(
-      "BOOL $classname$IsValidValue($classname$ value) {\n"
-      "  return YES;\n"
-      "}\n\n",
-      "classname", ClassName(descriptor_));
-
-    /*printer->Print(
-      "BOOL $classname$IsValidValue($classname$ value) {\n"
-      "  switch (value) {\n",
-      "classname", ClassName(descriptor_));
-
-    for (int i = 0; i < canonical_values_.size(); i++) {
-      printer->Print(
-        "    case $name$:\n",
-        "name", EnumValueName(canonical_values_[i]));
-    }
-
-    printer->Print(
-      "      return YES;\n"
-      "    default:\n"
-      "      return NO;\n"
-      "  }\n"
-      "}\n");*/
-
-    printer->Print(
-      "NSString *$classname$ToString($classname$ value) {\n"
-      "  switch (value) {\n",
-      "classname", ClassName(descriptor_));
-
-    for (int i = 0; i < canonical_values_.size(); i++) {
-      printer->Print(
-        "    case $name$:\n"
-        "      return @\"$value$\";\n",
-        "name", EnumValueName(canonical_values_[i]),
-        "value", EnumValueOriginalName(canonical_values_[i]));
-    }
-
-    printer->Print(
-      "    default:\n"
-      "      return [NSString stringWithFormat:@\"%d\", (int)value];\n"
-      "  }\n"
-      "}\n\n");
+      "    case $name$:\n",
+      "name", EnumValueName(canonical_values_[i]));
   }
+
+  printer->Print(
+    "      return YES;\n"
+    "    default:\n"
+    "      return NO;\n"
+    "  }\n"
+    "}\n");*/
+
+  printer->Print(
+    "NSString *$classname$ToString($classname$ value)\n{\n"
+    "  switch (value) {\n",
+    "classname", ClassName(descriptor_));
+
+  for(int i = 0; i < canonical_values_.size(); i++) {
+    printer->Print(
+      "    case $name$:\n"
+      "      return @\"$value$\";\n",
+      "name", EnumValueName(canonical_values_[i]),
+      "value", EnumValueOriginalName(canonical_values_[i]));
+  }
+
+  printer->Print(
+    "    default:\n"
+    "      return [NSString stringWithFormat:@\"%d\", (int)value];\n"
+    "  }\n"
+    "}\n\n\n");
+}
+
 }  // namespace objectivec
 }  // namespace compiler
 }  // namespace protobuf

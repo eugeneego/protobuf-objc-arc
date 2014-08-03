@@ -9,7 +9,34 @@ This project is based on an implementation of Protocol Buffers from Google.  See
 [g-protobuf]: http://code.google.com/p/protobuf/
 [protobuf-objc]: https://github.com/booyah/protobuf-objc
 
-# Credits
+##Build
+
+### Install dependencies
+
+    brew install autoconf
+    brew install automake
+    brew install libtool
+    brew install protobuf
+
+### Make
+
+    make clean
+    ./autogen.sh
+    ./configure
+    make
+    make install
+
+## Use
+
+### Compile proto files
+
+    protoc --plugin=/usr/local/bin/protoc-gen-objc ./person.proto --objc_out=./
+
+### Integrate runtime files into project
+    
+    pod "Protobuf-objc-arc", :git => "https://github.com/eugeneego/protobuf-objc-arc.git"
+
+## Credits
 
 InSports, Inc.
 -------------------------------------------------------------------------------

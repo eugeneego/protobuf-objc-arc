@@ -25,30 +25,31 @@
 
 namespace google {
 namespace protobuf {
-  namespace io {
-    class Printer;             // printer.h
-  }
+
+namespace io {
+class Printer;  // printer.h
 }
 
-namespace protobuf {
 namespace compiler {
 namespace objectivec {
 
-class EnumGenerator {
- public:
-  explicit EnumGenerator(const EnumDescriptor* descriptor);
+class EnumGenerator
+{
+public:
+  explicit EnumGenerator(const EnumDescriptor *descriptor);
   ~EnumGenerator();
 
-  void GenerateHeader(io::Printer* printer);
-  void GenerateSource(io::Printer* printer);
+  void GenerateHeader(io::Printer *printer);
+  void GenerateSource(io::Printer *printer);
 
- private:
-  const EnumDescriptor* descriptor_;
-  vector<const EnumValueDescriptor*> canonical_values_;
+private:
+  const EnumDescriptor *descriptor_;
+  vector<const EnumValueDescriptor *> canonical_values_;
 
-  struct Alias {
-    const EnumValueDescriptor* value;
-    const EnumValueDescriptor* canonical_value;
+  struct Alias
+  {
+    const EnumValueDescriptor *value;
+    const EnumValueDescriptor *canonical_value;
   };
   vector<Alias> aliases_;
 

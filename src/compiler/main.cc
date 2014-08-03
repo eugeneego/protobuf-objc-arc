@@ -22,6 +22,6 @@ using namespace google::protobuf::compiler::objectivec;
 
 int main(int argc, char **argv)
 {
-	ObjectiveCGenerator	generator;
-	return PluginMain(argc, argv, &generator);
+  ObjectiveCGenerator generator;
+  return PluginMain(argc, argv, &generator);
 }

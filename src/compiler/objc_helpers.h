@@ -29,54 +29,55 @@ namespace objectivec {
 
 // Converts the field's name to camel-case, e.g. "foo_bar_baz" becomes
 // "fooBarBaz" or "FooBarBaz", respectively.
-string UnderscoresToCamelCase(const FieldDescriptor* field);
-string UnderscoresToCapitalizedCamelCase(const FieldDescriptor* field);
-string UnderscoresToCapitalizedCamelCase(const string& name);
+string UnderscoresToCamelCase(const FieldDescriptor *field);
+string UnderscoresToCapitalizedCamelCase(const FieldDescriptor *field);
+string UnderscoresToCapitalizedCamelCase(const string &name);
 
 // Similar, but for method names.  (Typically, this merely has the effect
 // of lower-casing the first letter of the name.)
-string UnderscoresToCamelCase(const MethodDescriptor* method);
+string UnderscoresToCamelCase(const MethodDescriptor *method);
 
 // Apply CamelCase-formatting to the given filename string.  Existing
 // capitalization is not modified, but non-alphanumeric characters are
 // removed and the following legal character is capitalized.
-string FilenameToCamelCase(const string& filename);
+string FilenameToCamelCase(const string &filename);
 
 // Strips ".proto" or ".protodevel" from the end of a filename.
-string StripProto(const string& filename);
+string StripProto(const string &filename);
 
 // Returns true if the name requires a ns_returns_not_retained attribute applied
 // to it.
-bool IsRetainedName(const string& name);
+bool IsRetainedName(const string &name);
 
-bool IsBootstrapFile(const FileDescriptor* file);
+bool IsBootstrapFile(const FileDescriptor *file);
 
 // Gets the name of the file we're going to generate (sans the .pb.h
 // extension).  This does not include the path to that file.
-string FileName(const FileDescriptor* file);
+string FileName(const FileDescriptor *file);
 
 // Gets the path of the file we're going to generate (sans the .pb.h
 // extension).  The path will be dependent on the objectivec package
 // declared in the proto package.
-string FilePath(const FileDescriptor* file);
+string FilePath(const FileDescriptor *file);
 
 // Gets the name of the root class we'll generate in the file.  This class
 // is not meant for external consumption, but instead contains helpers that
 // the rest of the the classes need
-string FileClassName(const FileDescriptor* file);
+string FileClassName(const FileDescriptor *file);
 
 // These return the fully-qualified class name corresponding to the given
 // descriptor.
-string ClassName(const Descriptor* descriptor);
-string ClassName(const EnumDescriptor* descriptor);
-string ClassName(const ServiceDescriptor* descriptor);
+string ClassName(const Descriptor *descriptor);
+string ClassName(const EnumDescriptor *descriptor);
+string ClassName(const ServiceDescriptor *descriptor);
 
-string EnumValueName(const EnumValueDescriptor* descriptor);
-string EnumValueOriginalName(const EnumValueDescriptor* descriptor);
+string EnumValueName(const EnumValueDescriptor *descriptor);
+string EnumValueOriginalName(const EnumValueDescriptor *descriptor);
 
-string SafeName(const string& name);
+string SafeName(const string &name);
 
-enum ObjectiveCType {
+enum ObjectiveCType
+{
   OBJECTIVECTYPE_INT,
   OBJECTIVECTYPE_LONG,
   OBJECTIVECTYPE_FLOAT,
@@ -90,44 +91,48 @@ enum ObjectiveCType {
 
 ObjectiveCType GetObjectiveCType(FieldDescriptor::Type field_type);
 
-inline ObjectiveCType GetObjectiveCType(const FieldDescriptor* field) {
+inline ObjectiveCType GetObjectiveCType(const FieldDescriptor *field)
+{
   return GetObjectiveCType(field->type());
 }
 
 // Get the fully-qualified class name for a boxed primitive type, e.g.
 // "NSNumber" for OBJECTIVECTYPE_INT.  Returns NULL for enum and message
 // types.
-const char* BoxedPrimitiveTypeName(ObjectiveCType type);
+const char *BoxedPrimitiveTypeName(ObjectiveCType type);
 
 bool IsPrimitiveType(ObjectiveCType type);
 bool IsReferenceType(ObjectiveCType type);
 
-bool ReturnsPrimitiveType(const FieldDescriptor* field);
-bool ReturnsReferenceType(const FieldDescriptor* field);
+bool ReturnsPrimitiveType(const FieldDescriptor *field);
+bool ReturnsReferenceType(const FieldDescriptor *field);
 
-string DefaultValue(const FieldDescriptor* field);
-string BoxValue(const FieldDescriptor* field, const string& value);
+string DefaultValue(const FieldDescriptor *field);
+string BoxValue(const FieldDescriptor *field, const string &value);
 
-const char* GetArrayValueType(const FieldDescriptor* field);
+const char *GetArrayValueType(const FieldDescriptor *field);
 
-bool IsObjectArray(const FieldDescriptor* field);
+bool IsObjectArray(const FieldDescriptor *field);
 
 // Escape C++ trigraphs by escaping question marks to \?
-string EscapeTrigraphs(const string& to_escape);
+string EscapeTrigraphs(const string &to_escape);
 
 // Do message classes in this file keep track of unknown fields?
-inline bool HasUnknownFields(const FileDescriptor *file) {
+inline bool HasUnknownFields(const FileDescriptor *file)
+{
   return file->options().optimize_for() != FileOptions::LITE_RUNTIME;
 }
 
 // Does this file have generated parsing, serialization, and other
 // standard methods for which reflection-based fallback implementations exist?
-inline bool HasGeneratedMethods(const FileDescriptor *file) {
+inline bool HasGeneratedMethods(const FileDescriptor *file)
+{
   return file->options().optimize_for() != FileOptions::CODE_SIZE;
 }
 
 // Do message classes in this file have descriptor and refelction methods?
-inline bool HasDescriptorMethods(const FileDescriptor *file) {
+inline bool HasDescriptorMethods(const FileDescriptor *file)
+{
   return file->options().optimize_for() != FileOptions::LITE_RUNTIME;
 }
 
