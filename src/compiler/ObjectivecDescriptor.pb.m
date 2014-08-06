@@ -2,82 +2,105 @@
 
 #import "ObjectivecDescriptor.pb.h"
 
+
 @implementation ObjectivecDescriptorRoot
+
 static id<PBExtensionField> ObjectivecDescriptorRoot_objectivecFileOptions = nil;
-static PBExtensionRegistry* extensionRegistry = nil;
-+ (PBExtensionRegistry*) extensionRegistry {
+static PBExtensionRegistry *extensionRegistry = nil;
+
++ (PBExtensionRegistry *)extensionRegistry
+{
   return extensionRegistry;
 }
 
-+ (void) initialize {
++ (void)initialize {
   if (self == [ObjectivecDescriptorRoot class]) {
-    ObjectivecDescriptorRoot_objectivecFileOptions =
-      [PBConcreteExtensionField extensionWithType:PBExtensionTypeMessage
-                                     extendedClass:[PBFileOptions class]
-                                       fieldNumber:1002
-                                      defaultValue:[ObjectiveCFileOptions defaultInstance]
-                               messageOrGroupClass:[ObjectiveCFileOptions class]
-                                        isRepeated:NO
-                                          isPacked:NO
-                            isMessageSetWireFormat:NO];
-    PBMutableExtensionRegistry* registry = [PBMutableExtensionRegistry registry];
+    ObjectivecDescriptorRoot_objectivecFileOptions = [PBConcreteExtensionField
+      extensionWithType:PBExtensionTypeMessage
+      extendedClass:[PBFileOptions class]
+      fieldNumber:1002
+      defaultValue:nil
+      messageOrGroupClass:[ObjectiveCFileOptions class]
+      isRepeated:NO
+      isPacked:NO
+      isMessageSetWireFormat:NO];
+    PBMutableExtensionRegistry *registry = [PBMutableExtensionRegistry registry];
     [self registerAllExtensions:registry];
     [PBDescriptorRoot registerAllExtensions:registry];
     extensionRegistry = registry;
   }
 }
-+ (void) registerAllExtensions:(PBMutableExtensionRegistry*) registry {
+
++ (void)registerAllExtensions:(PBMutableExtensionRegistry *)registry
+{
   [registry addExtension:ObjectivecDescriptorRoot_objectivecFileOptions];
 }
-+ (id<PBExtensionField>) objectivecFileOptions {
+
++ (id<PBExtensionField>)objectivecFileOptions
+{
   return ObjectivecDescriptorRoot_objectivecFileOptions;
 }
 @end
 
+
 @interface ObjectiveCFileOptions ()
-@property (strong) NSString* package;
-@property (strong) NSString* classPrefix;
+
+
 @end
+
 
 @implementation ObjectiveCFileOptions
 
-- (BOOL) hasPackage {
-  return !!hasPackage_;
+- (BOOL)hasPackage
+{
+  return _hasPackage;
 }
-- (void) setHasPackage:(BOOL) value {
-  hasPackage_ = !!value;
+
+- (void)setPackage:(NSString *)value
+{
+  _hasPackage = value != nil;
+  _package = value;
 }
-@synthesize package;
-- (BOOL) hasClassPrefix {
-  return !!hasClassPrefix_;
+
+- (void)clearPackage
+{
+  _hasPackage = NO;
+  _package = nil;
 }
-- (void) setHasClassPrefix:(BOOL) value {
-  hasClassPrefix_ = !!value;
+
+- (BOOL)hasClassPrefix
+{
+  return _hasClassPrefix;
 }
-@synthesize classPrefix;
-- (id) init {
+
+- (void)setClassPrefix:(NSString *)value
+{
+  _hasClassPrefix = value != nil;
+  _classPrefix = value;
+}
+
+- (void)clearClassPrefix
+{
+  _hasClassPrefix = NO;
+  _classPrefix = nil;
+}
+
+- (instancetype)init
+{
   if ((self = [super init])) {
-    self.package = @"";
-    self.classPrefix = @"";
+    _package = nil;
+    _classPrefix = nil;
   }
   return self;
 }
-static ObjectiveCFileOptions* defaultObjectiveCFileOptionsInstance = nil;
-+ (void) initialize {
-  if (self == [ObjectiveCFileOptions class]) {
-    defaultObjectiveCFileOptionsInstance = [[ObjectiveCFileOptions alloc] init];
-  }
-}
-+ (ObjectiveCFileOptions*) defaultInstance {
-  return defaultObjectiveCFileOptionsInstance;
-}
-- (ObjectiveCFileOptions*) defaultInstance {
-  return defaultObjectiveCFileOptionsInstance;
-}
-- (BOOL) isInitialized {
+
+- (BOOL)isInitialized
+{
   return YES;
 }
-- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+
+- (void)writeToCodedOutputStream:(PBCodedOutputStream *)output
+{
   if (self.hasPackage) {
     [output writeString:1 value:self.package];
   }
@@ -86,55 +109,72 @@ static ObjectiveCFileOptions* defaultObjectiveCFileOptionsInstance = nil;
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
-- (int32_t) serializedSize {
-  int32_t size = memoizedSerializedSize;
-  if (size != -1) {
-    return size;
-  }
 
-  size = 0;
+- (int32_t)serializedSize
+{
+  int32_t size_ = 0;
   if (self.hasPackage) {
-    size += computeStringSize(1, self.package);
+    size_ += computeStringSize(1, self.package);
   }
   if (self.hasClassPrefix) {
-    size += computeStringSize(2, self.classPrefix);
+    size_ += computeStringSize(2, self.classPrefix);
   }
-  size += self.unknownFields.serializedSize;
-  memoizedSerializedSize = size;
-  return size;
+  size_ += self.unknownFields.serializedSize;
+  return size_;
 }
-+ (ObjectiveCFileOptions*) parseFromData:(NSData*) data {
-  return (ObjectiveCFileOptions*)[[[ObjectiveCFileOptions builder] mergeFromData:data] build];
+
++ (ObjectiveCFileOptions *)parseFromData:(NSData *)data
+{
+  return (ObjectiveCFileOptions *)[[[ObjectiveCFileOptions builder] mergeFromData:data] build];
 }
-+ (ObjectiveCFileOptions*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+
++ (ObjectiveCFileOptions *)parseFromData:(NSData *)data extensionRegistry:(PBExtensionRegistry *)extensionRegistry
+{
   return (ObjectiveCFileOptions*)[[[ObjectiveCFileOptions builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
 }
-+ (ObjectiveCFileOptions*) parseFromInputStream:(NSInputStream*) input {
+
++ (ObjectiveCFileOptions *)parseFromInputStream:(NSInputStream *)input
+{
   return (ObjectiveCFileOptions*)[[[ObjectiveCFileOptions builder] mergeFromInputStream:input] build];
 }
-+ (ObjectiveCFileOptions*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+
++ (ObjectiveCFileOptions *)parseFromInputStream:(NSInputStream *)input extensionRegistry:(PBExtensionRegistry *)extensionRegistry
+{
   return (ObjectiveCFileOptions*)[[[ObjectiveCFileOptions builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
 }
-+ (ObjectiveCFileOptions*) parseFromCodedInputStream:(PBCodedInputStream*) input {
-  return (ObjectiveCFileOptions*)[[[ObjectiveCFileOptions builder] mergeFromCodedInputStream:input] build];
+
++ (ObjectiveCFileOptions *)parseFromCodedInputStream:(PBCodedInputStream *)input
+{
+  return [[[ObjectiveCFileOptions builder] mergeFromCodedInputStream:input] build];
 }
-+ (ObjectiveCFileOptions*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (ObjectiveCFileOptions*)[[[ObjectiveCFileOptions builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
+
++ (ObjectiveCFileOptions *)parseFromCodedInputStream:(PBCodedInputStream *)input extensionRegistry:(PBExtensionRegistry *)extensionRegistry
+{
+  return [[[ObjectiveCFileOptions builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
 }
-+ (ObjectiveCFileOptions_Builder*) builder {
+
++ (ObjectiveCFileOptions_Builder *)builder
+{
   return [[ObjectiveCFileOptions_Builder alloc] init];
 }
-+ (ObjectiveCFileOptions_Builder*) builderWithPrototype:(ObjectiveCFileOptions*) prototype {
+
++ (ObjectiveCFileOptions_Builder *)builderWithPrototype:(ObjectiveCFileOptions *)prototype
+{
   return [[ObjectiveCFileOptions builder] mergeFrom:prototype];
 }
-- (ObjectiveCFileOptions_Builder*) builder {
+
+- (ObjectiveCFileOptions_Builder *)builder
+{
   return [ObjectiveCFileOptions builder];
 }
-- (ObjectiveCFileOptions_Builder*) toBuilder {
+
+- (ObjectiveCFileOptions_Builder *)toBuilder
+{
   return [ObjectiveCFileOptions builderWithPrototype:self];
 }
-- (void) writeDescriptionTo:(NSMutableString*) output withIndent:(NSString*) indent {
-  NSUInteger listCount = 0;
+
+- (void)writeDescriptionTo:(NSMutableString *)output withIndent:(NSString *)indent
+{
   if (self.hasPackage) {
     [output appendFormat:@"%@%@: %@\n", indent, @"package", self.package];
   }
@@ -143,7 +183,9 @@ static ObjectiveCFileOptions* defaultObjectiveCFileOptionsInstance = nil;
   }
   [self.unknownFields writeDescriptionTo:output withIndent:indent];
 }
-- (BOOL) isEqual:(id)other {
+
+- (BOOL)isEqual:(id)other
+{
   if (other == self) {
     return YES;
   }
@@ -152,15 +194,14 @@ static ObjectiveCFileOptions* defaultObjectiveCFileOptionsInstance = nil;
   }
   ObjectiveCFileOptions *otherMessage = other;
   return
-      self.hasPackage == otherMessage.hasPackage &&
-      (!self.hasPackage || [self.package isEqual:otherMessage.package]) &&
-      self.hasClassPrefix == otherMessage.hasClassPrefix &&
-      (!self.hasClassPrefix || [self.classPrefix isEqual:otherMessage.classPrefix]) &&
-      (self.unknownFields == otherMessage.unknownFields || (self.unknownFields != nil && [self.unknownFields isEqual:otherMessage.unknownFields]));
+    (self.hasPackage == otherMessage.hasPackage && (!self.hasPackage || [self.package isEqual:otherMessage.package])) &&
+    (self.hasClassPrefix == otherMessage.hasClassPrefix && (!self.hasClassPrefix || [self.classPrefix isEqual:otherMessage.classPrefix])) &&
+    (self.unknownFields == otherMessage.unknownFields || (self.unknownFields != nil && [self.unknownFields isEqual:otherMessage.unknownFields]));
 }
-- (NSUInteger) hash {
+
+- (NSUInteger)hash
+{
   NSUInteger hashCode = 7;
-  NSUInteger listCount = 0;
   if (self.hasPackage) {
     hashCode = hashCode * 31 + [self.package hash];
   }
@@ -170,44 +211,59 @@ static ObjectiveCFileOptions* defaultObjectiveCFileOptionsInstance = nil;
   hashCode = hashCode * 31 + [self.unknownFields hash];
   return hashCode;
 }
+
 @end
+
 
 @interface ObjectiveCFileOptions_Builder()
-@property (strong) ObjectiveCFileOptions* result;
+
+@property (strong) ObjectiveCFileOptions *result;
+
 @end
 
+
 @implementation ObjectiveCFileOptions_Builder
-@synthesize result;
-- (id) init {
+
+- (instancetype)init
+{
   if ((self = [super init])) {
     self.result = [[ObjectiveCFileOptions alloc] init];
   }
   return self;
 }
-- (PBGeneratedMessage*) internalGetResult {
-  return result;
+
+- (PBGeneratedMessage *)internalGetResult
+{
+  return _result;
 }
-- (ObjectiveCFileOptions_Builder*) clear {
+
+- (ObjectiveCFileOptions_Builder *)clear
+{
   self.result = [[ObjectiveCFileOptions alloc] init];
   return self;
 }
-- (ObjectiveCFileOptions_Builder*) clone {
-  return [ObjectiveCFileOptions builderWithPrototype:result];
+
+- (ObjectiveCFileOptions_Builder *)clone
+{
+  return [ObjectiveCFileOptions builderWithPrototype:_result];
 }
-- (ObjectiveCFileOptions*) defaultInstance {
-  return [ObjectiveCFileOptions defaultInstance];
-}
-- (ObjectiveCFileOptions*) build {
+
+- (ObjectiveCFileOptions *)build
+{
   [self checkInitialized];
   return [self buildPartial];
 }
-- (ObjectiveCFileOptions*) buildPartial {
-  ObjectiveCFileOptions* returnMe = result;
+
+- (ObjectiveCFileOptions *)buildPartial
+{
+  ObjectiveCFileOptions *returnMe = _result;
   self.result = nil;
   return returnMe;
 }
-- (ObjectiveCFileOptions_Builder*) mergeFrom:(ObjectiveCFileOptions*) other {
-  if (other == [ObjectiveCFileOptions defaultInstance]) {
+
+- (ObjectiveCFileOptions_Builder *)mergeFrom:(ObjectiveCFileOptions *)other
+{
+  if (other == nil) {
     return self;
   }
   if (other.hasPackage) {
@@ -219,11 +275,15 @@ static ObjectiveCFileOptions* defaultObjectiveCFileOptionsInstance = nil;
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
-- (ObjectiveCFileOptions_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+
+- (ObjectiveCFileOptions_Builder *)mergeFromCodedInputStream:(PBCodedInputStream *)input
+{
   return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
 }
-- (ObjectiveCFileOptions_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
+
+- (ObjectiveCFileOptions_Builder *)mergeFromCodedInputStream:(PBCodedInputStream *)input extensionRegistry:(PBExtensionRegistry*)extensionRegistry
+{
+  PBUnknownFieldSet_Builder *unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
   while (YES) {
     int32_t tag = [input readTag];
     switch (tag) {
@@ -248,37 +308,51 @@ static ObjectiveCFileOptions* defaultObjectiveCFileOptionsInstance = nil;
     }
   }
 }
-- (BOOL) hasPackage {
-  return result.hasPackage;
+
+- (BOOL)hasPackage
+{
+  return _result.hasPackage;
 }
-- (NSString*) package {
-  return result.package;
+
+- (NSString *)package
+{
+  return _result.package;
 }
-- (ObjectiveCFileOptions_Builder*) setPackage:(NSString*) value {
-  result.hasPackage = YES;
-  result.package = value;
+
+- (ObjectiveCFileOptions_Builder*)setPackage:(NSString *)value
+{
+  _result.package = value;
   return self;
 }
-- (ObjectiveCFileOptions_Builder*) clearPackage {
-  result.hasPackage = NO;
-  result.package = @"";
+
+- (ObjectiveCFileOptions_Builder*)clearPackage
+{
+  [_result clearPackage];
   return self;
 }
-- (BOOL) hasClassPrefix {
-  return result.hasClassPrefix;
+
+- (BOOL)hasClassPrefix
+{
+  return _result.hasClassPrefix;
 }
-- (NSString*) classPrefix {
-  return result.classPrefix;
+
+- (NSString *)classPrefix
+{
+  return _result.classPrefix;
 }
-- (ObjectiveCFileOptions_Builder*) setClassPrefix:(NSString*) value {
-  result.hasClassPrefix = YES;
-  result.classPrefix = value;
+
+- (ObjectiveCFileOptions_Builder*)setClassPrefix:(NSString *)value
+{
+  _result.classPrefix = value;
   return self;
 }
-- (ObjectiveCFileOptions_Builder*) clearClassPrefix {
-  result.hasClassPrefix = NO;
-  result.classPrefix = @"";
+
+- (ObjectiveCFileOptions_Builder*)clearClassPrefix
+{
+  [_result clearClassPrefix];
   return self;
 }
+
 @end
+
 

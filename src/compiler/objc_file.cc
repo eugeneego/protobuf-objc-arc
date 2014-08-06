@@ -52,9 +52,9 @@ void FileGenerator::GenerateHeader(io::Printer *printer)
 
   // hacky.  but this is how other generators determine if we're generating
   // the core ProtocolBuffers library
-  if(file_->name() != "google/protobuf/descriptor.proto") {
-    printer->Print("#import <ProtocolBuffers/ProtocolBuffers.h>\n\n");
-  }
+  //if(file_->name() != "google/protobuf/descriptor.proto") {
+  printer->Print("#import <ProtocolBuffers/ProtocolBuffers.h>\n\n");
+  //}
 
   if(file_->dependency_count() > 0) {
     for(int i = 0; i < file_->dependency_count(); i++) {

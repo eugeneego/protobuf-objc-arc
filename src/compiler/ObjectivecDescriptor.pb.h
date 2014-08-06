@@ -46,6 +46,8 @@
 @class PBUninterpretedOption_Builder;
 @class PBUninterpretedOption_NamePart;
 @class PBUninterpretedOption_NamePart_Builder;
+
+
 #ifndef __has_feature
   #define __has_feature(x) 0 // Compatibility with non-clang compilers.
 #endif // __has_feature
@@ -59,68 +61,70 @@
 #endif
 
 
-@interface ObjectivecDescriptorRoot : NSObject {
-}
-+ (PBExtensionRegistry*) extensionRegistry;
-+ (void) registerAllExtensions:(PBMutableExtensionRegistry*) registry;
-+ (id<PBExtensionField>) objectivecFileOptions;
+@interface ObjectivecDescriptorRoot : NSObject
+
++ (PBExtensionRegistry *)extensionRegistry;
++ (void)registerAllExtensions:(PBMutableExtensionRegistry *)registry;
++ (id<PBExtensionField>)objectivecFileOptions;
+
 @end
+
 
 @interface ObjectiveCFileOptions : PBGeneratedMessage {
 @private
-  BOOL hasPackage_:1;
-  BOOL hasClassPrefix_:1;
-  NSString* package;
-  NSString* classPrefix;
-}
-- (BOOL) hasPackage;
-- (BOOL) hasClassPrefix;
-@property (readonly, strong) NSString* package;
-@property (readonly, strong) NSString* classPrefix;
-
-+ (ObjectiveCFileOptions*) defaultInstance;
-- (ObjectiveCFileOptions*) defaultInstance;
-
-- (BOOL) isInitialized;
-- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output;
-- (ObjectiveCFileOptions_Builder*) builder;
-+ (ObjectiveCFileOptions_Builder*) builder;
-+ (ObjectiveCFileOptions_Builder*) builderWithPrototype:(ObjectiveCFileOptions*) prototype;
-- (ObjectiveCFileOptions_Builder*) toBuilder;
-
-+ (ObjectiveCFileOptions*) parseFromData:(NSData*) data;
-+ (ObjectiveCFileOptions*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (ObjectiveCFileOptions*) parseFromInputStream:(NSInputStream*) input;
-+ (ObjectiveCFileOptions*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (ObjectiveCFileOptions*) parseFromCodedInputStream:(PBCodedInputStream*) input;
-+ (ObjectiveCFileOptions*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-@end
-
-@interface ObjectiveCFileOptions_Builder : PBGeneratedMessage_Builder {
-@private
-  ObjectiveCFileOptions* result;
+  BOOL _hasPackage:1;
+  BOOL _hasClassPrefix:1;
 }
 
-- (ObjectiveCFileOptions*) defaultInstance;
+@property (nonatomic, strong) NSString *package;
+- (void)clearPackage;
+- (BOOL)hasPackage;
 
-- (ObjectiveCFileOptions_Builder*) clear;
-- (ObjectiveCFileOptions_Builder*) clone;
+@property (nonatomic, strong) NSString *classPrefix;
+- (void)clearClassPrefix;
+- (BOOL)hasClassPrefix;
 
-- (ObjectiveCFileOptions*) build;
-- (ObjectiveCFileOptions*) buildPartial;
 
-- (ObjectiveCFileOptions_Builder*) mergeFrom:(ObjectiveCFileOptions*) other;
-- (ObjectiveCFileOptions_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
-- (ObjectiveCFileOptions_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+- (BOOL)isInitialized;
+- (void)writeToCodedOutputStream:(PBCodedOutputStream *)output;
 
-- (BOOL) hasPackage;
-- (NSString*) package;
-- (ObjectiveCFileOptions_Builder*) setPackage:(NSString*) value;
-- (ObjectiveCFileOptions_Builder*) clearPackage;
+- (ObjectiveCFileOptions_Builder *)builder;
++ (ObjectiveCFileOptions_Builder *)builder;
++ (ObjectiveCFileOptions_Builder *)builderWithPrototype:(ObjectiveCFileOptions *)prototype;
+- (ObjectiveCFileOptions_Builder *)toBuilder;
 
-- (BOOL) hasClassPrefix;
-- (NSString*) classPrefix;
-- (ObjectiveCFileOptions_Builder*) setClassPrefix:(NSString*) value;
-- (ObjectiveCFileOptions_Builder*) clearClassPrefix;
++ (ObjectiveCFileOptions *)parseFromData:(NSData *)data;
++ (ObjectiveCFileOptions *)parseFromData:(NSData *)data extensionRegistry:(PBExtensionRegistry *)extensionRegistry;
++ (ObjectiveCFileOptions *)parseFromInputStream:(NSInputStream *)input;
++ (ObjectiveCFileOptions *)parseFromInputStream:(NSInputStream *)input extensionRegistry:(PBExtensionRegistry *)extensionRegistry;
++ (ObjectiveCFileOptions *)parseFromCodedInputStream:(PBCodedInputStream *)input;
++ (ObjectiveCFileOptions *)parseFromCodedInputStream:(PBCodedInputStream *)input extensionRegistry:(PBExtensionRegistry *)extensionRegistry;
+
 @end
+
+
+@interface ObjectiveCFileOptions_Builder : PBGeneratedMessage_Builder
+
+- (ObjectiveCFileOptions_Builder *)clear;
+- (ObjectiveCFileOptions_Builder *)clone;
+
+- (ObjectiveCFileOptions *)build;
+- (ObjectiveCFileOptions *)buildPartial;
+
+- (ObjectiveCFileOptions_Builder *)mergeFrom:(ObjectiveCFileOptions *)other;
+- (ObjectiveCFileOptions_Builder *)mergeFromCodedInputStream:(PBCodedInputStream *)input;
+- (ObjectiveCFileOptions_Builder *)mergeFromCodedInputStream:(PBCodedInputStream *)input extensionRegistry:(PBExtensionRegistry *)extensionRegistry;
+
+- (BOOL)hasPackage;
+- (NSString *)package;
+- (ObjectiveCFileOptions_Builder *)setPackage:(NSString *)value;
+- (ObjectiveCFileOptions_Builder *)clearPackage;
+
+- (BOOL)hasClassPrefix;
+- (NSString *)classPrefix;
+- (ObjectiveCFileOptions_Builder *)setClassPrefix:(NSString *)value;
+- (ObjectiveCFileOptions_Builder *)clearClassPrefix;
+
+@end
+
 
