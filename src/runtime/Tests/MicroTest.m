@@ -17,10 +17,10 @@
 
 #import "MicroTest.h"
 
-
 @implementation MicroTest
 
-- (void)testIntegers {
+- (void)testIntegers
+{
   STAssertNil(nil, @"nil should be nil");
   STAssertEquals(2, 2, @"2 should equal 2");
 }

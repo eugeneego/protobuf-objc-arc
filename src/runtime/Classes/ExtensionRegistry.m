@@ -17,46 +17,39 @@
 
 #import "ExtensionRegistry.h"
 
-@interface PBExtensionRegistry()
-@property (strong) NSDictionary* classMap;
-@end
-
 @implementation PBExtensionRegistry
 
-@synthesize classMap;
+static PBExtensionRegistry *emptyRegistry = nil;
 
-
-static PBExtensionRegistry* emptyRegistry = nil;
-
-+ (void) initialize {
-  if (self == [PBExtensionRegistry class]) {
++ (void)initialize
+{
+  if(self == [PBExtensionRegistry class]) {
     emptyRegistry = [[PBExtensionRegistry alloc] initWithClassMap:[NSDictionary dictionary]];
   }
 }
 
-
-- (id) initWithClassMap:(NSDictionary*) map_{
-  if ((self = [super init])) {
-    self.classMap = map_;
+- (id)initWithClassMap:(NSDictionary *)map_
+{
+  if((self = [super init])) {
+    classMap = map_;
   }
-
   return self;
 }
 
-
-- (id) keyForClass:(Class) clazz {
+- (id)keyForClass:(Class)clazz
+{
   return NSStringFromClass(clazz);
 }
 
-
-+ (PBExtensionRegistry*) emptyRegistry {
++ (PBExtensionRegistry *)emptyRegistry
+{
   return emptyRegistry;
 }
 
-
-- (id<PBExtensionField>) getExtension:(Class) clazz fieldNumber:(NSInteger) fieldNumber {
-  NSDictionary* extensionMap = [classMap objectForKey:[self keyForClass:clazz]];
-  return [extensionMap objectForKey:[NSNumber numberWithInteger:fieldNumber]];
+- (id<PBExtensionField>)getExtension:(Class)clazz fieldNumber:(NSInteger)fieldNumber
+{
+  NSDictionary *extensionMap = classMap[[self keyForClass:clazz]];
+  return extensionMap[@(fieldNumber)];
 }
 
 @end

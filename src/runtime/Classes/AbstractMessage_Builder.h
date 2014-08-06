@@ -23,7 +23,5 @@
 * other methods.
 */
 @interface PBAbstractMessage_Builder : NSObject<PBMessage_Builder>
-{
-}
 
 @end

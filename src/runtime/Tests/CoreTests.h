@@ -17,8 +17,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface CoreTests : SenTestCase {
-
-}
+@interface CoreTests : SenTestCase
 
 @end

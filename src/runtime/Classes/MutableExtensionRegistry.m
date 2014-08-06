@@ -19,46 +19,37 @@
 
 #import "ExtensionField.h"
 
-@interface PBMutableExtensionRegistry()
-@property (strong) NSMutableDictionary* mutableClassMap;
-@end
-
 @implementation PBMutableExtensionRegistry
 
-@synthesize mutableClassMap;
-
-
-- (id) initWithClassMap:(NSMutableDictionary*) mutableClassMap_ {
-  if ((self = [super initWithClassMap:mutableClassMap_])) {
-    self.mutableClassMap = mutableClassMap_;
+- (id)initWithClassMap:(NSMutableDictionary *)mutableClassMap_
+{
+  if((self = [super initWithClassMap:mutableClassMap_])) {
+    mutableClassMap = mutableClassMap_;
   }
-
   return self;
 }
 
-
-+ (PBMutableExtensionRegistry*) registry {
-  return [[PBMutableExtensionRegistry alloc] initWithClassMap:[NSMutableDictionary dictionary]] ;
++ (PBMutableExtensionRegistry *)registry
+{
+  return [[PBMutableExtensionRegistry alloc] initWithClassMap:[NSMutableDictionary dictionary]];
 }
 
-
-- (void) addExtension:(id<PBExtensionField>) extension {
-  if (extension == nil) {
+- (void)addExtension:(id<PBExtensionField>)extension
+{
+  if(extension == nil) {
     return;
   }
 
   Class extendedClass = [extension extendedClass];
   id key = [self keyForClass:extendedClass];
 
-  NSMutableDictionary* extensionMap = [classMap objectForKey:key];
-  if (extensionMap == nil) {
+  NSMutableDictionary *extensionMap = classMap[key];
+  if(extensionMap == nil) {
     extensionMap = [NSMutableDictionary dictionary];
-    [mutableClassMap setObject:extensionMap forKey:key];
+    mutableClassMap[key] = extensionMap;
   }
 
-  [extensionMap setObject:extension
-                   forKey:[NSNumber numberWithInteger:[extension fieldNumber]]];
+  extensionMap[@([extension fieldNumber])] = extension;
 }
-
 
 @end

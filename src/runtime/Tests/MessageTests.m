@@ -23,34 +23,36 @@
 
 - (TestAllTypes *)mergeSource
 {
-  return [[[[[[TestAllTypes builder]
-    setOptionalInt32:1]
-    setOptionalString:@"foo"]
-    setOptionalForeignMessage:nil]
-    addRepeatedString:@"bar"]
-    build];
+  TestAllTypes *message = [[TestAllTypes alloc] init];
+  message.optionalInt32 = 1;
+  message.optionalString = @"foo";
+  message.optionalForeignMessage = nil;
+  [message addRepeatedString:@"bar"];
+  return message;
 }
 
 - (TestAllTypes *)mergeDestination
 {
-  return [[[[[[TestAllTypes builder]
-    setOptionalInt64:2]
-    setOptionalString:@"baz"]
-    setOptionalForeignMessage:[[[ForeignMessage builder] setC:3] build]]
-    addRepeatedString:@"qux"]
-    build];
+  TestAllTypes *message = [[TestAllTypes alloc] init];
+  message.optionalInt64 = 2;
+  message.optionalString = @"baz";
+  message.optionalForeignMessage = [[ForeignMessage alloc] init];
+  message.optionalForeignMessage.c = 3;
+  [message addRepeatedString:@"qux"];
+  return message;
 }
 
 - (TestAllTypes *)mergeResult
 {
-  return [[[[[[[[TestAllTypes builder]
-    setOptionalInt32:1]
-    setOptionalInt64:2]
-    setOptionalString:@"foo"]
-    setOptionalForeignMessage:[[[ForeignMessage builder] setC:3] build]]
-    addRepeatedString:@"qux"]
-    addRepeatedString:@"bar"]
-    build];
+  TestAllTypes *message = [[TestAllTypes alloc] init];
+  message.optionalInt32 = 1;
+  message.optionalInt64 = 2;
+  message.optionalString = @"foo";
+  message.optionalForeignMessage = [[ForeignMessage alloc] init];
+  message.optionalForeignMessage.c = 3;
+  [message addRepeatedString:@"qux"];
+  [message addRepeatedString:@"bar"];
+  return message;
 }
 
 - (void)testMergeFrom
@@ -65,62 +67,66 @@
 
 - (TestRequired *)testRequiredUninitialized
 {
-  return [[TestRequired alloc] init];
+  TestRequired *message = [[TestRequired alloc] init];
+  return message;
 }
 
 - (TestRequired *)testRequiredInitialized
 {
-  return [[[[[TestRequired builder] setA:1] setB:2] setC:3] build];
+  TestRequired *message = [[TestRequired alloc] init];
+  message.a = 1;
+  message.b = 2;
+  message.c = 3;
+  return message;
 }
 
 - (void)testRequired
 {
-  TestRequired_Builder *builder = [TestRequired builder];
+  TestRequired *message = [[TestRequired alloc] init];
 
-  STAssertFalse(builder.isInitialized, @"");
-  [builder setA:1];
-  STAssertFalse(builder.isInitialized, @"");
-  [builder setB:1];
-  STAssertFalse(builder.isInitialized, @"");
-  [builder setC:1];
-  STAssertTrue(builder.isInitialized, @"");
+  STAssertFalse(message.isInitialized, @"");
+  message.a = 1;
+  STAssertFalse(message.isInitialized, @"");
+  message.b = 1;
+  STAssertFalse(message.isInitialized, @"");
+  message.c = 1;
+  STAssertTrue(message.isInitialized, @"");
 }
 
 - (void)testRequiredForeign
 {
-  TestRequiredForeign_Builder *builder = [TestRequiredForeign builder];
+  TestRequiredForeign *message = [[TestRequiredForeign alloc] init];
 
-  STAssertTrue(builder.isInitialized, @"");
+  STAssertTrue(message.isInitialized, @"");
 
-  [builder setOptionalMessage:self.testRequiredUninitialized];
-  STAssertFalse(builder.isInitialized, @"");
+  message.optionalMessage = self.testRequiredUninitialized;
+  STAssertFalse(message.isInitialized, @"");
 
-  [builder setOptionalMessage:self.testRequiredInitialized];
-  STAssertTrue(builder.isInitialized, @"");
+  message.optionalMessage = self.testRequiredInitialized;
+  STAssertTrue(message.isInitialized, @"");
 
-  [builder addRepeatedMessage:self.testRequiredUninitialized];
-  STAssertFalse(builder.isInitialized, @"");
+  [message addRepeatedMessage:self.testRequiredUninitialized];
+  STAssertFalse(message.isInitialized, @"");
 }
 
 - (void)testRequiredExtension
 {
-  TestAllExtensions_Builder *builder = [TestAllExtensions builder];
+  TestAllExtensions *message = [[TestAllExtensions alloc] init];
 
-  STAssertTrue(builder.isInitialized, @"");
+  STAssertTrue(message.isInitialized, @"");
 
-  [builder setExtension:[TestRequired single] value:self.testRequiredUninitialized];
-  STAssertFalse(builder.isInitialized, @"");
+  [message setExtension:[TestRequired single] value:self.testRequiredUninitialized];
+  STAssertFalse(message.isInitialized, @"");
 
-  [builder setExtension:[TestRequired single] value:self.testRequiredInitialized];
-  STAssertTrue(builder.isInitialized, @"");
+  [message setExtension:[TestRequired single] value:self.testRequiredInitialized];
+  STAssertTrue(message.isInitialized, @"");
 
-  [builder addExtension:[TestRequired multi] value:self.testRequiredUninitialized];
-  STAssertFalse(builder.isInitialized, @"");
+  [message addExtension:[TestRequired multi] value:self.testRequiredUninitialized];
+  STAssertFalse(message.isInitialized, @"");
 
-  [builder setExtension:[TestRequired multi] index:0 value:self.testRequiredInitialized];
-  STAssertTrue(builder.isInitialized, @"");
+  [message setExtension:[TestRequired multi] index:0 value:self.testRequiredInitialized];
+  STAssertTrue(message.isInitialized, @"");
 }
-
 
 - (void)testUninitializedException
 {
@@ -130,7 +136,7 @@
 - (void)testBuildPartial
 {
   // We're mostly testing that no exception is thrown.
-  TestRequired *message = [[TestRequired builder] buildPartial];
+  TestRequired *message = [[TestRequired alloc] init];
   STAssertFalse(message.isInitialized, @"");
 }
 
@@ -147,11 +153,10 @@
 {
   // We're mostly testing that no exception is thrown.
 
-  TestRequiredForeign *message = [[[[[TestRequiredForeign builder]
-    setOptionalMessage:self.testRequiredUninitialized]
-    addRepeatedMessage:self.testRequiredUninitialized]
-    addRepeatedMessage:self.testRequiredUninitialized]
-    buildPartial];
+  TestRequiredForeign *message = [[TestRequiredForeign alloc] init];
+  message.optionalMessage = self.testRequiredUninitialized;
+  [message addRepeatedMessage:self.testRequiredUninitialized];
+  [message addRepeatedMessage:self.testRequiredUninitialized];
 
   STAssertFalse(message.isInitialized, @"");
 }
@@ -163,11 +168,10 @@
 
 - (void)testParseNestedUnititialized
 {
-  TestRequiredForeign *message = [[[[[TestRequiredForeign builder]
-    setOptionalMessage:self.testRequiredUninitialized]
-    addRepeatedMessage:self.testRequiredUninitialized]
-    addRepeatedMessage:self.testRequiredUninitialized]
-    buildPartial];
+  TestRequiredForeign *message = [[TestRequiredForeign alloc] init];
+  message.optionalMessage = self.testRequiredUninitialized;
+  [message addRepeatedMessage:self.testRequiredUninitialized];
+  [message addRepeatedMessage:self.testRequiredUninitialized];
 
   NSData *data = message.data;
 

@@ -19,15 +19,12 @@
 
 @class PBUnknownFieldSet_Builder;
 
-@interface PBGeneratedMessage_Builder : PBAbstractMessage_Builder {
-}
+@interface PBGeneratedMessage_Builder : PBAbstractMessage_Builder
 
 /* @protected */
-- (BOOL) parseUnknownField:(PBCodedInputStream*) input
-             unknownFields:(PBUnknownFieldSet_Builder*) unknownFields
-         extensionRegistry:(PBExtensionRegistry*) extensionRegistry
-                       tag:(int32_t) tag;
+- (BOOL)parseUnknownField:(PBCodedInputStream *)input unknownFields:(PBUnknownFieldSet_Builder *)unknownFields
+  extensionRegistry:(PBExtensionRegistry *)extensionRegistry tag:(int32_t)tag;
 
-- (void) checkInitialized;
+- (void)checkInitialized;
 
 @end

@@ -16,8 +16,6 @@
 // limitations under the License.
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface CodedInputStreamTests : SenTestCase {
-
-}
+@interface CodedInputStreamTests : SenTestCase
 
 @end

@@ -18,33 +18,32 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const PBArrayTypeMismatchException;
-extern NSString * const PBArrayNumberExpectedException;
-extern NSString * const PBArrayAllocationFailureException;
+extern NSString *const PBArrayTypeMismatchException;
+extern NSString *const PBArrayNumberExpectedException;
+extern NSString *const PBArrayAllocationFailureException;
 
 typedef enum _PBArrayValueType
 {
-	PBArrayValueTypeBool,
-	PBArrayValueTypeInt32,
-	PBArrayValueTypeUInt32,
-	PBArrayValueTypeInt64,
-	PBArrayValueTypeUInt64,
-	PBArrayValueTypeFloat,
-	PBArrayValueTypeDouble,
+  PBArrayValueTypeBool,
+  PBArrayValueTypeInt32,
+  PBArrayValueTypeUInt32,
+  PBArrayValueTypeInt64,
+  PBArrayValueTypeUInt64,
+  PBArrayValueTypeFloat,
+  PBArrayValueTypeDouble,
 } PBArrayValueType;
 
 // PBArray is an immutable array class that's optimized for storing primitive
 // values.  All values stored in an PBArray instance must have the same type
 // (PBArrayValueType). 
-@interface PBArray : NSObject <NSCopying>
+@interface PBArray : NSObject<NSCopying>
 {
 @protected
-	PBArrayValueType	_valueType;
-	NSUInteger			_capacity;
-	NSUInteger			_count;
-	void *				_data;
+  PBArrayValueType _valueType;
+  NSUInteger _capacity;
+  NSUInteger _count;
+  void *_data;
 }
-
 
 - (NSUInteger)count;
 - (BOOL)boolAtIndex:(NSUInteger)index;
@@ -56,9 +55,9 @@ typedef enum _PBArrayValueType
 - (Float64)doubleAtIndex:(NSUInteger)index;
 - (BOOL)isEqualToArray:(PBArray *)array;
 
-@property (nonatomic,assign,readonly) PBArrayValueType valueType;
-@property (nonatomic,assign,readonly) const void * data;
-@property (nonatomic,assign,readonly,getter=count) NSUInteger count;
+@property (nonatomic, assign, readonly) PBArrayValueType valueType;
+@property (nonatomic, assign, readonly) const void *data;
+@property (nonatomic, assign, readonly, getter=count) NSUInteger count;
 
 @end
 

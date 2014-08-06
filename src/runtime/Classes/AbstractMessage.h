@@ -24,8 +24,6 @@
 * @author Cyrus Najmabadi
 */
 @interface PBAbstractMessage : NSObject<PBMessage>
-{
-}
 
 /**
 * Writes a string description of the message into the given mutable string

@@ -62,7 +62,7 @@
     self.lastField = nil;
     _lastFieldNumber = 0;
   }
-  [_fields setObject:field forKey:[NSNumber numberWithInt:number]];
+  _fields[@(number)] = field;
   return self;
 }
 
@@ -82,7 +82,7 @@
   if(number == 0) {
     return nil;
   } else {
-    PBField *existing = [_fields objectForKey:[NSNumber numberWithInt:number]];
+    PBField *existing = _fields[@(number)];
     _lastFieldNumber = number;
     self.lastField = [PBMutableField field];
     if(existing != nil) {
@@ -137,7 +137,7 @@
     @throw [NSException exceptionWithName:@"IllegalArgument" reason:@"" userInfo:nil];
   }
 
-  return number == _lastFieldNumber || ([_fields objectForKey:[NSNumber numberWithInt:number]] != nil);
+  return number == _lastFieldNumber || _fields[@(number)] != nil;
 }
 
 /**
@@ -165,7 +165,7 @@
 {
   if(other != nil) {
     for(NSNumber *number in other.fields) {
-      PBField *field = [other.fields objectForKey:number];
+      PBField *field = other.fields[number];
       [self mergeField:field forNumber:[number intValue]];
     }
   }

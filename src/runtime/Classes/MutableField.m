@@ -22,107 +22,115 @@
 
 @implementation PBMutableField
 
-+ (PBMutableField *)field {
-	return [[PBMutableField alloc] init] ;
++ (PBMutableField *)field
+{
+  return [[PBMutableField alloc] init];
 }
 
-- (PBMutableField *)clear {
-	_varintArray = nil;
-	_fixed32Array = nil;
-	_fixed64Array = nil;
-	_lengthDelimitedArray = nil;
-	_groupArray = nil;
+- (PBMutableField *)clear
+{
+  _varintArray = nil;
+  _fixed32Array = nil;
+  _fixed64Array = nil;
+  _lengthDelimitedArray = nil;
+  _groupArray = nil;
 
-	return self;
+  return self;
 }
 
-- (PBMutableField *)mergeFromField:(PBField *)other {
-	if (other.varintArray.count > 0) {
-		if (_varintArray == nil) {
-			_varintArray = [other->_varintArray copy];
-		} else {
-			[_varintArray appendArray:other->_varintArray];
-		}
-	}
+- (PBMutableField *)mergeFromField:(PBField *)other
+{
+  if(other.varintArray.count > 0) {
+    if(_varintArray == nil) {
+      _varintArray = [other->_varintArray copy];
+    } else {
+      [_varintArray appendArray:other->_varintArray];
+    }
+  }
 
-	if (other.fixed32Array.count > 0) {
-		if (_fixed32Array == nil) {
-			_fixed32Array = [other->_fixed32Array copy];
-		} else {
-			[_fixed32Array appendArray:other->_fixed32Array];
-		}
-	}
+  if(other.fixed32Array.count > 0) {
+    if(_fixed32Array == nil) {
+      _fixed32Array = [other->_fixed32Array copy];
+    } else {
+      [_fixed32Array appendArray:other->_fixed32Array];
+    }
+  }
 
-	if (other.fixed64Array.count > 0) {
-		if (_fixed64Array == nil) {
-			_fixed64Array = [other->_fixed64Array copy];
-		} else {
-			[_fixed64Array appendArray:other->_fixed64Array];
-		}
-	}
+  if(other.fixed64Array.count > 0) {
+    if(_fixed64Array == nil) {
+      _fixed64Array = [other->_fixed64Array copy];
+    } else {
+      [_fixed64Array appendArray:other->_fixed64Array];
+    }
+  }
 
-	if (other.lengthDelimitedArray.count > 0) {
-		if (_lengthDelimitedArray == nil) {
-			_lengthDelimitedArray = [other->_lengthDelimitedArray copy];
-		} else {
-            [_lengthDelimitedArray addObjectsFromArray:other->_lengthDelimitedArray];
-		}
-	}
+  if(other.lengthDelimitedArray.count > 0) {
+    if(_lengthDelimitedArray == nil) {
+      _lengthDelimitedArray = [other->_lengthDelimitedArray copy];
+    } else {
+      [_lengthDelimitedArray addObjectsFromArray:other->_lengthDelimitedArray];
+    }
+  }
 
-	if (other.groupArray.count > 0) {
-		if (_groupArray == nil) {
-			_groupArray = [other->_groupArray copy];
-		} else {
-            [_groupArray addObjectsFromArray:other->_groupArray];
-		}
-	}
+  if(other.groupArray.count > 0) {
+    if(_groupArray == nil) {
+      _groupArray = [other->_groupArray copy];
+    } else {
+      [_groupArray addObjectsFromArray:other->_groupArray];
+    }
+  }
 
-	return self;
+  return self;
 }
 
-- (PBMutableField *)addVarint:(int64_t)value {
-	if (_varintArray == nil) {
-		_varintArray = [[PBAppendableArray alloc] initWithValueType:PBArrayValueTypeInt64];
-	}
-	[_varintArray addInt64:value];
+- (PBMutableField *)addVarint:(int64_t)value
+{
+  if(_varintArray == nil) {
+    _varintArray = [[PBAppendableArray alloc] initWithValueType:PBArrayValueTypeInt64];
+  }
+  [_varintArray addInt64:value];
 
-	return self;
+  return self;
 }
 
-- (PBMutableField *)addFixed32:(int32_t)value {
-	if (_fixed32Array == nil) {
-		_fixed32Array = [[PBAppendableArray alloc] initWithValueType:PBArrayValueTypeInt32];
-	}
-	[_fixed32Array addInt32:value];
+- (PBMutableField *)addFixed32:(int32_t)value
+{
+  if(_fixed32Array == nil) {
+    _fixed32Array = [[PBAppendableArray alloc] initWithValueType:PBArrayValueTypeInt32];
+  }
+  [_fixed32Array addInt32:value];
 
-	return self;
+  return self;
 }
 
-- (PBMutableField *)addFixed64:(int64_t)value {
-	if (_fixed64Array == nil) {
-		_fixed64Array = [[PBAppendableArray alloc] initWithValueType:PBArrayValueTypeInt64];
-	}
-	[_fixed64Array addInt64:value];
+- (PBMutableField *)addFixed64:(int64_t)value
+{
+  if(_fixed64Array == nil) {
+    _fixed64Array = [[PBAppendableArray alloc] initWithValueType:PBArrayValueTypeInt64];
+  }
+  [_fixed64Array addInt64:value];
 
-	return self;
+  return self;
 }
 
-- (PBMutableField *)addLengthDelimited:(NSData *)value {
-	if (_lengthDelimitedArray == nil) {
-		_lengthDelimitedArray = [[NSMutableArray alloc] init];
-	}
-	[_lengthDelimitedArray addObject:value];
+- (PBMutableField *)addLengthDelimited:(NSData *)value
+{
+  if(_lengthDelimitedArray == nil) {
+    _lengthDelimitedArray = [[NSMutableArray alloc] init];
+  }
+  [_lengthDelimitedArray addObject:value];
 
-	return self;
+  return self;
 }
 
-- (PBMutableField *)addGroup:(PBUnknownFieldSet *)value {
-	if (_groupArray == nil) {
-		_groupArray = [[NSMutableArray alloc] init];
-	}
-	[_groupArray addObject:value];
+- (PBMutableField *)addGroup:(PBUnknownFieldSet *)value
+{
+  if(_groupArray == nil) {
+    _groupArray = [[NSMutableArray alloc] init];
+  }
+  [_groupArray addObject:value];
 
-	return self;
+  return self;
 }
 
 @end

@@ -17,9 +17,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-
-@interface MicroTest : SenTestCase {
-
-}
+@interface MicroTest : SenTestCase
 
 @end

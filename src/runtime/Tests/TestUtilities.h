@@ -18,22 +18,18 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 @class TestAllExtensions;
-@class TestAllExtensions_Builder;
 @class TestAllTypes;
-@class TestAllTypes_Builder;
 @class TestPackedTypes;
-@class TestPackedTypes_Builder;
 @class TestPackedExtensions;
-@class TestPackedExtensions_Builder;
 @class PBExtensionRegistry;
 @class PBMutableExtensionRegistry;
 
 @interface TestUtilities : SenTestCase
 
-+ (void)setAllFields:(TestAllTypes_Builder *)message;
-+ (void)setAllExtensions:(TestAllExtensions_Builder *)message;
-+ (void)setPackedFields:(TestPackedTypes_Builder *)message;
-+ (void)setPackedExtensions:(TestPackedExtensions_Builder *)message;
++ (void)setAllFields:(TestAllTypes *)message;
++ (void)setAllExtensions:(TestAllExtensions *)message;
++ (void)setPackedFields:(TestPackedTypes *)message;
++ (void)setPackedExtensions:(TestPackedExtensions *)message;
 + (void)registerAllExtensions:(PBMutableExtensionRegistry *)registry;
 
 + (TestAllTypes *)allSet;
@@ -48,7 +44,7 @@
 + (void)assertPackedFieldsSet:(TestPackedTypes *)message;
 + (void)assertPackedExtensionsSet:(TestPackedExtensions *)message;
 
-+ (void)modifyRepeatedExtensions:(TestAllExtensions_Builder *)message;
++ (void)modifyRepeatedExtensions:(TestAllExtensions *)message;
 
 + (PBExtensionRegistry *)extensionRegistry;
 

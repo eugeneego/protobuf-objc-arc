@@ -17,7 +17,8 @@
 
 #import "ExtensionField.h"
 
-typedef enum {
+typedef enum
+{
   PBExtensionTypeBool,
   PBExtensionTypeFixed32,
   PBExtensionTypeSFixed32,
@@ -38,7 +39,8 @@ typedef enum {
   PBExtensionTypeEnum
 } PBExtensionType;
 
-@interface PBConcreteExtensionField : NSObject<PBExtensionField> {
+@interface PBConcreteExtensionField : NSObject<PBExtensionField>
+{
 @private
   PBExtensionType type;
 
@@ -53,13 +55,13 @@ typedef enum {
   BOOL isMessageSetWireFormat;
 }
 
-+ (PBConcreteExtensionField*) extensionWithType:(PBExtensionType) type
-                                extendedClass:(Class) extendedClass
-                                  fieldNumber:(int32_t) fieldNumber
-                                 defaultValue:(id) defaultValue
-                            messageOrGroupClass:(Class) messageOrGroupClass
-                                   isRepeated:(BOOL) isRepeated
-                                     isPacked:(BOOL) isPacked
-                       isMessageSetWireFormat:(BOOL) isMessageSetWireFormat;
++ (PBConcreteExtensionField *)extensionWithType:(PBExtensionType)type
+  extendedClass:(Class)extendedClass
+  fieldNumber:(int32_t)fieldNumber
+  defaultValue:(id)defaultValue
+  messageOrGroupClass:(Class)messageOrGroupClass
+  isRepeated:(BOOL)isRepeated
+  isPacked:(BOOL)isPacked
+  isMessageSetWireFormat:(BOOL)isMessageSetWireFormat;
 
 @end

@@ -24,25 +24,24 @@
 
 - (void)testAccessors
 {
-  TestAllTypes_Builder *builder = [TestAllTypes builder];
-  [TestUtilities setAllFields:builder];
-  TestAllTypes *message = [builder build];
+  TestAllTypes *message = [[TestAllTypes alloc] init];
+  [TestUtilities setAllFields:message];
   [TestUtilities assertAllFieldsSet:message];
 }
 
 - (void)testRepeatedAppend
 {
-  TestAllTypes_Builder *builder = [TestAllTypes builder];
+  TestAllTypes *message = [[TestAllTypes alloc] init];
 
   NSArray *array = @[ @1, @2, @3, @4 ];
 
-  [builder setRepeatedInt32Array:array];
-  [builder setRepeatedForeignEnumArray:@[ @(ForeignEnumForeignBaz) ]];
+  [message setRepeatedInt32Array:array];
+  [message setRepeatedForeignEnumArray:@[ @(ForeignEnumForeignBaz) ]];
 
-  ForeignMessage *foreignMessage = [[[ForeignMessage builder] setC:12] build];
-  [builder setRepeatedForeignMessageArray:@[ foreignMessage ]];
+  ForeignMessage *foreignMessage = [[ForeignMessage alloc] init];
+  foreignMessage.c = 12;
+  [message setRepeatedForeignMessageArray:@[ foreignMessage ]];
 
-  TestAllTypes *message = [builder build];
   STAssertTrue(1 == message.repeatedForeignMessage.count, @"");
   STAssertTrue(12 == [[message repeatedForeignMessageAtIndex:0] c], @"");
 }
@@ -50,40 +49,39 @@
 - (void)testClearExtension
 {
   // clearExtension() is not actually used in TestUtil, so try it manually.
-  PBExtendableMessage_Builder *builder1 = [[TestAllExtensions builder] setExtension:[UnittestRoot optionalInt32Extension] value:@1];
+  PBExtendableMessage *message1 = [[TestAllExtensions alloc] init];
+  [message1 setExtension:[UnittestRoot optionalInt32Extension] value:@1];
 
-  STAssertTrue([builder1 hasExtension:[UnittestRoot optionalInt32Extension]], @"");
-  [builder1 clearExtension:[UnittestRoot optionalInt32Extension]];
-  STAssertFalse([builder1 hasExtension:[UnittestRoot optionalInt32Extension]], @"");
+  STAssertTrue([message1 hasExtension:[UnittestRoot optionalInt32Extension]], @"");
+  [message1 clearExtension:[UnittestRoot optionalInt32Extension]];
+  STAssertFalse([message1 hasExtension:[UnittestRoot optionalInt32Extension]], @"");
 
-  PBExtendableMessage_Builder *builder2 = [[TestAllExtensions builder] addExtension:[UnittestRoot repeatedInt32Extension] value:@1];
+  PBExtendableMessage *message2 = [[TestAllExtensions alloc] init];
+  [message2 addExtension:[UnittestRoot repeatedInt32Extension] value:@1];
 
-  STAssertTrue(1 == [[builder2 getExtension:[UnittestRoot repeatedInt32Extension]] count], @"");
-  [builder2 clearExtension:[UnittestRoot repeatedInt32Extension]];
-  STAssertTrue(0 == [[builder2 getExtension:[UnittestRoot repeatedInt32Extension]] count], @"");
+  STAssertTrue(1 == [[message2 getExtension:[UnittestRoot repeatedInt32Extension]] count], @"");
+  [message2 clearExtension:[UnittestRoot repeatedInt32Extension]];
+  STAssertTrue(0 == [[message2 getExtension:[UnittestRoot repeatedInt32Extension]] count], @"");
 }
 
 - (void)testExtensionAccessors
 {
-  TestAllExtensions_Builder *builder = [TestAllExtensions builder];
-  [TestUtilities setAllExtensions:builder];
-  TestAllExtensions *message = [builder build];
+  TestAllExtensions *message = [[TestAllExtensions alloc] init];
+  [TestUtilities setAllExtensions:message];
   [TestUtilities assertAllExtensionsSet:message];
 }
 
 - (void)testExtensionRepeatedSetters
 {
-  TestAllExtensions_Builder *builder = [TestAllExtensions builder];
-  [TestUtilities setAllExtensions:builder];
-  [TestUtilities modifyRepeatedExtensions:builder];
-  TestAllExtensions *message = [builder build];
+  TestAllExtensions *message = [[TestAllExtensions alloc] init];
+  [TestUtilities setAllExtensions:message];
+  [TestUtilities modifyRepeatedExtensions:message];
   [TestUtilities assertRepeatedExtensionsModified:message];
 }
 
 - (void)testExtensionDefaults
 {
   [TestUtilities assertExtensionsClear:[[TestAllExtensions alloc] init]];
-  [TestUtilities assertExtensionsClear:[[TestAllExtensions builder] build]];
 }
 
 @end

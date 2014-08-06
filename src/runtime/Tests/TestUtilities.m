@@ -61,7 +61,7 @@
 * Modify the repeated extensions of {@code message} to contain the values
 * expected by {@code assertRepeatedExtensionsModified()}.
 */
-+ (void)modifyRepeatedExtensions:(TestAllExtensions_Builder *)message
++ (void)modifyRepeatedExtensions:(TestAllExtensions *)message
 {
   [message setExtension:[UnittestRoot repeatedInt32Extension] index:1 value:@501];
   [message setExtension:[UnittestRoot repeatedInt64Extension] index:1 value:@502];
@@ -79,10 +79,21 @@
   [message setExtension:[UnittestRoot repeatedStringExtension] index:1 value:@"515"];
   [message setExtension:[UnittestRoot repeatedBytesExtension] index:1 value:[TestUtilities getData:@"516"]];
 
-  [message setExtension:[UnittestRoot repeatedGroupExtension] index:1 value:[[[RepeatedGroup_extension builder] setA:517] build]];
-  [message setExtension:[UnittestRoot repeatedNestedMessageExtension] index:1 value:[[[TestAllTypes_NestedMessage builder] setBb:518] build]];
-  [message setExtension:[UnittestRoot repeatedForeignMessageExtension] index:1 value:[[[ForeignMessage builder] setC:519] build]];
-  [message setExtension:[UnittestRoot repeatedImportMessageExtension] index:1 value:[[[ImportMessage builder] setD:520] build]];
+  RepeatedGroup_extension *repeatedGroupExtension = [[RepeatedGroup_extension alloc] init];
+  repeatedGroupExtension.a = 517;
+  [message setExtension:[UnittestRoot repeatedGroupExtension] index:1 value:repeatedGroupExtension];
+
+  TestAllTypes_NestedMessage *testAllTypesNestedMessage = [[TestAllTypes_NestedMessage alloc] init];
+  testAllTypesNestedMessage.bb = 518;
+  [message setExtension:[UnittestRoot repeatedNestedMessageExtension] index:1 value:testAllTypesNestedMessage];
+
+  ForeignMessage *foreignMessage = [[ForeignMessage alloc] init];
+  foreignMessage.c = 519;
+  [message setExtension:[UnittestRoot repeatedForeignMessageExtension] index:1 value:foreignMessage];
+
+  ImportMessage *importMessage = [[ImportMessage alloc] init];
+  importMessage.d = 520;
+  [message setExtension:[UnittestRoot repeatedImportMessageExtension] index:1 value:importMessage];
 
   [message setExtension:[UnittestRoot repeatedNestedEnumExtension] index:1 value:@(TestAllTypes_NestedEnumFoo)];
   [message setExtension:[UnittestRoot repeatedForeignEnumExtension] index:1 value:@(ForeignEnumForeignFoo)];
@@ -601,35 +612,42 @@
   [[[TestUtilities alloc] init] assertAllFieldsSet:message];
 }
 
-+ (void)setAllFields:(TestAllTypes_Builder *)message
++ (void)setAllFields:(TestAllTypes *)message
 {
-  [message setOptionalInt32:101];
-  [message setOptionalInt64:102];
-  [message setOptionalUint32:103];
-  [message setOptionalUint64:104];
-  [message setOptionalSint32:105];
-  [message setOptionalSint64:106];
-  [message setOptionalFixed32:107];
-  [message setOptionalFixed64:108];
-  [message setOptionalSfixed32:109];
-  [message setOptionalSfixed64:110];
-  [message setOptionalFloat:111];
-  [message setOptionalDouble:112];
-  [message setOptionalBool:YES];
-  [message setOptionalString:@"115"];
-  [message setOptionalBytes:[self getData:@"116"]];
+  message.optionalInt32 = 101;
+  message.optionalInt64 = 102;
+  message.optionalUint32 = 103;
+  message.optionalUint64 = 104;
+  message.optionalSint32 = 105;
+  message.optionalSint64 = 106;
+  message.optionalFixed32 = 107;
+  message.optionalFixed64 = 108;
+  message.optionalSfixed32 = 109;
+  message.optionalSfixed64 = 110;
+  message.optionalFloat = 111;
+  message.optionalDouble = 112;
+  message.optionalBool = YES;
+  message.optionalString = @"115";
+  message.optionalBytes = [self getData:@"116"];
 
-  [message setOptionalGroup:[[[TestAllTypes_OptionalGroup builder] setA:117] build]];
-  [message setOptionalNestedMessage:[[[TestAllTypes_NestedMessage builder] setBb:118] build]];
-  [message setOptionalForeignMessage:[[[ForeignMessage builder] setC:119] build]];
-  [message setOptionalImportMessage:[[[ImportMessage builder] setD:120] build]];
+  message.optionalGroup = [[TestAllTypes_OptionalGroup alloc] init];
+  message.optionalGroup.a = 117;
 
-  [message setOptionalNestedEnum:TestAllTypes_NestedEnumBaz];
-  [message setOptionalForeignEnum:ForeignEnumForeignBaz];
-  [message setOptionalImportEnum:ImportEnumImportBaz];
+  message.optionalNestedMessage = [[TestAllTypes_NestedMessage alloc] init];
+  message.optionalNestedMessage.bb = 118;
 
-  [message setOptionalStringPiece:@"124"];
-  [message setOptionalCord:@"125"];
+  message.optionalForeignMessage = [[ForeignMessage alloc] init];
+  message.optionalForeignMessage.c = 119;
+
+  message.optionalImportMessage = [[ImportMessage alloc] init];
+  message.optionalImportMessage.d = 120;
+
+  message.optionalNestedEnum = TestAllTypes_NestedEnumBaz;
+  message.optionalForeignEnum = ForeignEnumForeignBaz;
+  message.optionalImportEnum = ImportEnumImportBaz;
+
+  message.optionalStringPiece = @"124";
+  message.optionalCord = @"125";
 
   // -----------------------------------------------------------------
 
@@ -649,10 +667,21 @@
   [message addRepeatedString:@"215"];
   [message addRepeatedBytes:[self getData:@"216"]];
 
-  [message addRepeatedGroup:[[[TestAllTypes_RepeatedGroup builder] setA:217] build]];
-  [message addRepeatedNestedMessage:[[[TestAllTypes_NestedMessage builder] setBb:218] build]];
-  [message addRepeatedForeignMessage:[[[ForeignMessage builder] setC:219] build]];
-  [message addRepeatedImportMessage:[[[ImportMessage builder] setD:220] build]];
+  TestAllTypes_RepeatedGroup *testAllTypesRepeatedGroup1 = [[TestAllTypes_RepeatedGroup alloc] init];
+  testAllTypesRepeatedGroup1.a = 217;
+  [message addRepeatedGroup:testAllTypesRepeatedGroup1];
+
+  TestAllTypes_NestedMessage *testAllTypesNestedMessage1 = [[TestAllTypes_NestedMessage alloc] init];
+  testAllTypesNestedMessage1.bb = 218;
+  [message addRepeatedNestedMessage:testAllTypesNestedMessage1];
+
+  ForeignMessage *foreignMessage1 = [[ForeignMessage alloc] init];
+  foreignMessage1.c = 219;
+  [message addRepeatedForeignMessage:foreignMessage1];
+
+  ImportMessage *importMessage1 = [[ImportMessage alloc] init];
+  importMessage1.d = 220;
+  [message addRepeatedImportMessage:importMessage1];
 
   [message addRepeatedNestedEnum:TestAllTypes_NestedEnumBar];
   [message addRepeatedForeignEnum:ForeignEnumForeignBar];
@@ -678,10 +707,21 @@
   [message addRepeatedString:@"315"];
   [message addRepeatedBytes:[self getData:@"316"]];
 
-  [message addRepeatedGroup:[[[TestAllTypes_RepeatedGroup builder] setA:317] build]];
-  [message addRepeatedNestedMessage:[[[TestAllTypes_NestedMessage builder] setBb:318] build]];
-  [message addRepeatedForeignMessage:[[[ForeignMessage builder] setC:319] build]];
-  [message addRepeatedImportMessage:[[[ImportMessage builder] setD:320] build]];
+  TestAllTypes_RepeatedGroup *testAllTypesRepeatedGroup = [[TestAllTypes_RepeatedGroup alloc] init];
+  testAllTypesRepeatedGroup.a = 317;
+  [message addRepeatedGroup:testAllTypesRepeatedGroup];
+
+  TestAllTypes_NestedMessage *testAllTypesNestedMessage = [[TestAllTypes_NestedMessage alloc] init];
+  testAllTypesNestedMessage.bb = 318;
+  [message addRepeatedNestedMessage:testAllTypesNestedMessage];
+
+  ForeignMessage *foreignMessage = [[ForeignMessage alloc] init];
+  foreignMessage.c = 319;
+  [message addRepeatedForeignMessage:foreignMessage];
+
+  ImportMessage *importMessage = [[ImportMessage alloc] init];
+  importMessage.d = 320;
+  [message addRepeatedImportMessage:importMessage];
 
   [message addRepeatedNestedEnum:TestAllTypes_NestedEnumBaz];
   [message addRepeatedForeignEnum:ForeignEnumForeignBaz];
@@ -692,35 +732,35 @@
 
   // -----------------------------------------------------------------
 
-  [message setDefaultInt32:401];
-  [message setDefaultInt64:402];
-  [message setDefaultUint32:403];
-  [message setDefaultUint64:404];
-  [message setDefaultSint32:405];
-  [message setDefaultSint64:406];
-  [message setDefaultFixed32:407];
-  [message setDefaultFixed64:408];
-  [message setDefaultSfixed32:409];
-  [message setDefaultSfixed64:410];
-  [message setDefaultFloat:411];
-  [message setDefaultDouble:412];
-  [message setDefaultBool:NO];
-  [message setDefaultString:@"415"];
-  [message setDefaultBytes:[self getData:@"416"]];
+  message.defaultInt32 = 401;
+  message.defaultInt64 = 402;
+  message.defaultUint32 = 403;
+  message.defaultUint64 = 404;
+  message.defaultSint32 = 405;
+  message.defaultSint64 = 406;
+  message.defaultFixed32 = 407;
+  message.defaultFixed64 = 408;
+  message.defaultSfixed32 = 409;
+  message.defaultSfixed64 = 410;
+  message.defaultFloat = 411;
+  message.defaultDouble = 412;
+  message.defaultBool = NO;
+  message.defaultString = @"415";
+  message.defaultBytes = [self getData:@"416"];
 
-  [message setDefaultNestedEnum:TestAllTypes_NestedEnumFoo];
-  [message setDefaultForeignEnum:ForeignEnumForeignFoo];
-  [message setDefaultImportEnum:ImportEnumImportFoo];
+  message.defaultNestedEnum = TestAllTypes_NestedEnumFoo;
+  message.defaultForeignEnum = ForeignEnumForeignFoo;
+  message.defaultImportEnum = ImportEnumImportFoo;
 
-  [message setDefaultStringPiece:@"424"];
-  [message setDefaultCord:@"425"];
+  message.defaultStringPiece = @"424";
+  message.defaultCord = @"425";
 }
 
 /**
 * Set every field of {@code message} to the values expected by
 * {@code assertAllExtensionsSet()}.
 */
-+ (void)setAllExtensions:(TestAllExtensions_Builder *)message
++ (void)setAllExtensions:(TestAllExtensions *)message
 {
   [message setExtension:[UnittestRoot optionalInt32Extension] value:@101];
   [message setExtension:[UnittestRoot optionalInt64Extension] value:@102L];
@@ -738,10 +778,21 @@
   [message setExtension:[UnittestRoot optionalStringExtension] value:@"115"];
   [message setExtension:[UnittestRoot optionalBytesExtension] value:[self getData:@"116"]];
 
-  [message setExtension:[UnittestRoot optionalGroupExtension] value:[[[OptionalGroup_extension builder] setA:117] build]];
-  [message setExtension:[UnittestRoot optionalNestedMessageExtension] value:[[[TestAllTypes_NestedMessage builder] setBb:118] build]];
-  [message setExtension:[UnittestRoot optionalForeignMessageExtension] value:[[[ForeignMessage builder] setC:119] build]];
-  [message setExtension:[UnittestRoot optionalImportMessageExtension] value:[[[ImportMessage builder] setD:120] build]];
+  OptionalGroup_extension *optionalGroupExtension = [[OptionalGroup_extension alloc] init];
+  optionalGroupExtension.a = 117;
+  [message setExtension:[UnittestRoot optionalGroupExtension] value:optionalGroupExtension];
+
+  TestAllTypes_NestedMessage *testAllTypesNestedMessage = [[TestAllTypes_NestedMessage alloc] init];
+  testAllTypesNestedMessage.bb = 118;
+  [message setExtension:[UnittestRoot optionalNestedMessageExtension] value:testAllTypesNestedMessage];
+
+  ForeignMessage *foreignMessage = [[ForeignMessage alloc] init];
+  foreignMessage.c = 119;
+  [message setExtension:[UnittestRoot optionalForeignMessageExtension] value:foreignMessage];
+
+  ImportMessage *importMessage = [[ImportMessage alloc] init];
+  importMessage.d = 120;
+  [message setExtension:[UnittestRoot optionalImportMessageExtension] value:importMessage];
 
   [message setExtension:[UnittestRoot optionalNestedEnumExtension] value:@(TestAllTypes_NestedEnumBaz)];
   [message setExtension:[UnittestRoot optionalForeignEnumExtension] value:@(ForeignEnumForeignBaz)];
@@ -768,10 +819,21 @@
   [message addExtension:[UnittestRoot repeatedStringExtension] value:@"215"];
   [message addExtension:[UnittestRoot repeatedBytesExtension] value:[self getData:@"216"]];
 
-  [message addExtension:[UnittestRoot repeatedGroupExtension] value:[[[RepeatedGroup_extension builder] setA:217] build]];
-  [message addExtension:[UnittestRoot repeatedNestedMessageExtension] value:[[[TestAllTypes_NestedMessage builder] setBb:218] build]];
-  [message addExtension:[UnittestRoot repeatedForeignMessageExtension] value:[[[ForeignMessage builder] setC:219] build]];
-  [message addExtension:[UnittestRoot repeatedImportMessageExtension] value:[[[ImportMessage builder] setD:220] build]];
+  RepeatedGroup_extension *repeatedGroupExtension = [[RepeatedGroup_extension alloc] init];
+  repeatedGroupExtension.a = 217;
+  [message addExtension:[UnittestRoot repeatedGroupExtension] value:repeatedGroupExtension];
+
+  TestAllTypes_NestedMessage *testAllTypesNestedMessage1 = [[TestAllTypes_NestedMessage alloc] init];
+  testAllTypesNestedMessage1.bb = 218;
+  [message addExtension:[UnittestRoot repeatedNestedMessageExtension] value:testAllTypesNestedMessage1];
+
+  ForeignMessage *foreignMessage1 = [[ForeignMessage alloc] init];
+  foreignMessage1.c = 219;
+  [message addExtension:[UnittestRoot repeatedForeignMessageExtension] value:foreignMessage1];
+
+  ImportMessage *importMessage1 = [[ImportMessage alloc] init];
+  importMessage1.d = 220;
+  [message addExtension:[UnittestRoot repeatedImportMessageExtension] value:importMessage1];
 
   [message addExtension:[UnittestRoot repeatedNestedEnumExtension] value:@(TestAllTypes_NestedEnumBar)];
   [message addExtension:[UnittestRoot repeatedForeignEnumExtension] value:@(ForeignEnumForeignBar)];
@@ -797,10 +859,21 @@
   [message addExtension:[UnittestRoot repeatedStringExtension] value:@"315"];
   [message addExtension:[UnittestRoot repeatedBytesExtension] value:[self getData:@"316"]];
 
-  [message addExtension:[UnittestRoot repeatedGroupExtension] value:[[[RepeatedGroup_extension builder] setA:317] build]];
-  [message addExtension:[UnittestRoot repeatedNestedMessageExtension] value:[[[TestAllTypes_NestedMessage builder] setBb:318] build]];
-  [message addExtension:[UnittestRoot repeatedForeignMessageExtension] value:[[[ForeignMessage builder] setC:319] build]];
-  [message addExtension:[UnittestRoot repeatedImportMessageExtension] value:[[[ImportMessage builder] setD:320] build]];
+  RepeatedGroup_extension *repeatedGroupExtension1 = [[RepeatedGroup_extension alloc] init];
+  repeatedGroupExtension1.a = 317;
+  [message addExtension:[UnittestRoot repeatedGroupExtension] value:repeatedGroupExtension1];
+
+  TestAllTypes_NestedMessage *testAllTypesNestedMessage2 = [[TestAllTypes_NestedMessage alloc] init];
+  testAllTypesNestedMessage2.bb = 318;
+  [message addExtension:[UnittestRoot repeatedNestedMessageExtension] value:testAllTypesNestedMessage2];
+
+  ForeignMessage *foreignMessage2 = [[ForeignMessage alloc] init];
+  foreignMessage2.c = 319;
+  [message addExtension:[UnittestRoot repeatedForeignMessageExtension] value:foreignMessage2];
+
+  ImportMessage *importMessage2 = [[ImportMessage alloc] init];
+  importMessage2.d = 320;
+  [message addExtension:[UnittestRoot repeatedImportMessageExtension] value:importMessage2];
 
   [message addExtension:[UnittestRoot repeatedNestedEnumExtension] value:@(TestAllTypes_NestedEnumBaz)];
   [message addExtension:[UnittestRoot repeatedForeignEnumExtension] value:@(ForeignEnumForeignBaz)];
@@ -929,30 +1002,30 @@
 
 + (TestAllTypes *)allSet
 {
-  TestAllTypes_Builder *builder = [TestAllTypes builder];
-  [self setAllFields:builder];
-  return [builder build];
+  TestAllTypes *message = [[TestAllTypes alloc] init];
+  [self setAllFields:message];
+  return message;
 }
 
 + (TestAllExtensions *)allExtensionsSet
 {
-  TestAllExtensions_Builder *builder = [TestAllExtensions builder];
-  [self setAllExtensions:builder];
-  return [builder build];
+  TestAllExtensions *message = [[TestAllExtensions alloc] init];
+  [self setAllExtensions:message];
+  return message;
 }
 
 + (TestPackedTypes *)packedSet
 {
-  TestPackedTypes_Builder *builder = [TestPackedTypes builder];
-  [self setPackedFields:builder];
-  return [builder build];
+  TestPackedTypes *message = [[TestPackedTypes alloc] init];
+  [self setPackedFields:message];
+  return message;
 }
 
 + (TestPackedExtensions *)packedExtensionsSet
 {
-  TestPackedExtensions_Builder *builder = [TestPackedExtensions builder];
-  [self setPackedExtensions:builder];
-  return [builder build];
+  TestPackedExtensions *message = [[TestPackedExtensions alloc] init];
+  [self setPackedExtensions:message];
+  return message;
 }
 
 // -------------------------------------------------------------------
@@ -1261,7 +1334,7 @@
   [[[TestUtilities alloc] init] assertExtensionsClear:message];
 }
 
-+ (void)setPackedFields:(TestPackedTypes_Builder *)message
++ (void)setPackedFields:(TestPackedTypes *)message
 {
   [message addPackedInt32:601];
   [message addPackedInt64:602];
@@ -1345,7 +1418,7 @@
   [[[TestUtilities alloc] init] assertPackedFieldsSet:message];
 }
 
-+ (void)setPackedExtensions:(TestPackedExtensions_Builder *)message
++ (void)setPackedExtensions:(TestPackedExtensions *)message
 {
   [message addExtension:[UnittestRoot packedInt32Extension] value:@601];
   [message addExtension:[UnittestRoot packedInt64Extension] value:@602L];

@@ -24,20 +24,27 @@
 @class PBUnknownFieldSet_Builder;
 
 @protocol PBExtensionField
-- (int32_t) fieldNumber;
-- (PBWireFormat) wireType;
-- (BOOL) isRepeated;
-- (Class) extendedClass;
-- (id) defaultValue;
 
-- (void) mergeFromCodedInputStream:(PBCodedInputStream*) input
-                     unknownFields:(PBUnknownFieldSet_Builder*) unknownFields
-                 extensionRegistry:(PBExtensionRegistry*) extensionRegistry
-                           builder:(PBExtendableMessage_Builder*) builder
-                               tag:(int32_t) tag;
-- (void) writeValue:(id) value includingTagToCodedOutputStream:(PBCodedOutputStream*) output;
-- (int32_t) computeSerializedSizeIncludingTag:(id) value;
-- (void) writeDescriptionOf:(id) value
-                         to:(NSMutableString*) output
-                 withIndent:(NSString*) indent;
+- (int32_t)fieldNumber;
+
+- (PBWireFormat)wireType;
+
+- (BOOL)isRepeated;
+
+- (Class)extendedClass;
+
+- (id)defaultValue;
+
+- (void)mergeFromCodedInputStream:(PBCodedInputStream *)input
+  unknownFields:(PBUnknownFieldSet_Builder *)unknownFields
+  extensionRegistry:(PBExtensionRegistry *)extensionRegistry
+  builder:(PBExtendableMessage_Builder *)builder
+  tag:(int32_t)tag;
+
+- (void)writeValue:(id)value includingTagToCodedOutputStream:(PBCodedOutputStream *)output;
+
+- (int32_t)computeSerializedSizeIncludingTag:(id)value;
+
+- (void)writeDescriptionOf:(id)value to:(NSMutableString *)output withIndent:(NSString *)indent;
+
 @end

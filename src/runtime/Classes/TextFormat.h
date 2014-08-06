@@ -15,15 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-@interface PBTextFormat : NSObject {
+@interface PBTextFormat : NSObject
 
-}
++ (int32_t)parseInt32:(NSString *)text;
++ (int32_t)parseUInt32:(NSString *)text;
++ (int64_t)parseInt64:(NSString *)text;
++ (int64_t)parseUInt64:(NSString *)text;
 
-+ (int32_t) parseInt32:(NSString*) text;
-+ (int32_t) parseUInt32:(NSString*) text;
-+ (int64_t) parseInt64:(NSString*) text;
-+ (int64_t) parseUInt64:(NSString*) text;
-
-+ (NSData*) unescapeBytes:(NSString*) input;
++ (NSData *)unescapeBytes:(NSString *)input;
 
 @end

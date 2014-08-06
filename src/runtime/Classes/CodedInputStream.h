@@ -34,11 +34,9 @@
 @interface PBCodedInputStream : NSObject
 {
 @private
-  NSMutableData *buffer;
   int32_t bufferSize;
   int32_t bufferSizeAfterLimit;
   int32_t bufferPos;
-  NSInputStream *input;
   int32_t lastTag;
 
   /**

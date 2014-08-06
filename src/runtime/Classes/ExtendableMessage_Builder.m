@@ -39,13 +39,11 @@
   int32_t wireType = PBWireFormatGetTagWireType(tag);
   int32_t fieldNumber = PBWireFormatGetTagFieldNumber(tag);
 
-  id<PBExtensionField> extension = [extensionRegistry getExtension:[message class]
-    fieldNumber:fieldNumber];
+  id<PBExtensionField> extension = [extensionRegistry getExtension:[message class] fieldNumber:fieldNumber];
 
   if(extension != nil) {
     if([extension wireType] == wireType) {
-      [extension mergeFromCodedInputStream:input unknownFields:unknownFields
-        extensionRegistry:extensionRegistry builder:self tag:tag];
+      [extension mergeFromCodedInputStream:input unknownFields:unknownFields extensionRegistry:extensionRegistry builder:self tag:tag];
       return YES;
     }
   }
@@ -65,103 +63,31 @@
 
 - (PBExtendableMessage_Builder *)setExtension:(id<PBExtensionField>)extension value:(id)value
 {
-  PBExtendableMessage *message = [self internalGetResult];
-  [message ensureExtensionIsRegistered:extension];
-
-  if([extension isRepeated]) {
-    @throw [NSException exceptionWithName:@"IllegalArgument" reason:@"Must call addExtension() for repeated types." userInfo:nil];
-  }
-
-  if(message.extensionMap == nil) {
-    message.extensionMap = [NSMutableDictionary dictionary];
-  }
-  message.extensionMap[@([extension fieldNumber])] = value;
+  [[self internalGetResult] setExtension:extension value:value];
   return self;
 }
 
 - (PBExtendableMessage_Builder *)addExtension:(id<PBExtensionField>)extension value:(id)value
 {
-  PBExtendableMessage *message = [self internalGetResult];
-  [message ensureExtensionIsRegistered:extension];
-
-  if(![extension isRepeated]) {
-    @throw [NSException exceptionWithName:@"IllegalArgument" reason:@"Must call setExtension() for singular types." userInfo:nil];
-  }
-
-  if(message.extensionMap == nil) {
-    message.extensionMap = [NSMutableDictionary dictionary];
-  }
-  NSNumber *fieldNumber = @([extension fieldNumber]);
-  NSMutableArray *list = message.extensionMap[fieldNumber];
-  if(list == nil) {
-    list = [NSMutableArray array];
-    message.extensionMap[fieldNumber] = list;
-  }
-
-  [list addObject:value];
+  [[self internalGetResult] addExtension:extension value:value];
   return self;
 }
 
 - (PBExtendableMessage_Builder *)setExtension:(id<PBExtensionField>)extension index:(int32_t)index value:(id)value
 {
-  PBExtendableMessage *message = [self internalGetResult];
-  [message ensureExtensionIsRegistered:extension];
-
-  if(![extension isRepeated]) {
-    @throw [NSException exceptionWithName:@"IllegalArgument" reason:@"Must call setExtension() for singular types." userInfo:nil];
-  }
-
-  if(message.extensionMap == nil) {
-    message.extensionMap = [NSMutableDictionary dictionary];
-  }
-
-  NSNumber *fieldNumber = @([extension fieldNumber]);
-  NSMutableArray *list = message.extensionMap[fieldNumber];
-
-  list[(NSUInteger)index] = value;
-
+  [[self internalGetResult] setExtension:extension index:index value:value];
   return self;
 }
 
 - (PBExtendableMessage_Builder *)clearExtension:(id<PBExtensionField>)extension
 {
-  PBExtendableMessage *message = [self internalGetResult];
-  [message ensureExtensionIsRegistered:extension];
-  [message.extensionMap removeObjectForKey:@([extension fieldNumber])];
-
+  [[self internalGetResult] clearExtension:extension];
   return self;
 }
 
 - (void)mergeExtensionFields:(PBExtendableMessage *)other
 {
-  PBExtendableMessage *thisMessage = [self internalGetResult];
-  if([thisMessage class] != [other class]) {
-    @throw [NSException exceptionWithName:@"IllegalArgument" reason:@"Cannot merge extensions from a different type" userInfo:nil];
-  }
-
-  if(other.extensionMap.count > 0) {
-    if(thisMessage.extensionMap == nil) {
-      thisMessage.extensionMap = [NSMutableDictionary dictionary];
-    }
-
-    NSDictionary *registry = other.extensionRegistry;
-    for(NSNumber *fieldNumber in other.extensionMap) {
-      id<PBExtensionField> thisField = registry[fieldNumber];
-      id value = other.extensionMap[fieldNumber];
-
-      if([thisField isRepeated]) {
-        NSMutableArray *list = thisMessage.extensionMap[fieldNumber];
-        if(list == nil) {
-          list = [NSMutableArray array];
-          thisMessage.extensionMap[fieldNumber] = list;
-        }
-
-        [list addObjectsFromArray:value];
-      } else {
-        thisMessage.extensionMap[fieldNumber] = value;
-      }
-    }
-  }
+  [[self internalGetResult] mergeExtensionFields:other];
 }
 
 @end

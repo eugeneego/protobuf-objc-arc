@@ -17,13 +17,14 @@
 
 #import "ExtensionRegistry.h"
 
-@interface PBMutableExtensionRegistry : PBExtensionRegistry {
+@interface PBMutableExtensionRegistry : PBExtensionRegistry
+{
 @private
-  NSMutableDictionary* mutableClassMap;
+  NSMutableDictionary *mutableClassMap;
 }
 
-+ (PBMutableExtensionRegistry*) registry;
++ (PBMutableExtensionRegistry *)registry;
 
-- (void) addExtension:(id<PBExtensionField>) extension;
+- (void)addExtension:(id<PBExtensionField>)extension;
 
 @end

@@ -15,13 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-@interface SmallBlockInputStream : NSInputStream {
-  NSInputStream* underlyingStream;
+@interface SmallBlockInputStream : NSInputStream
+{
   int32_t blockSize;
 }
 
-@property (strong) NSInputStream* underlyingStream;
+@property (strong) NSInputStream *underlyingStream;
 
-+ (SmallBlockInputStream*) streamWithData:(NSData*) data blockSize:(int32_t) blockSize;
++ (SmallBlockInputStream *)streamWithData:(NSData *)data blockSize:(int32_t)blockSize;
 
 @end

@@ -17,4 +17,5 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 @interface ArrayTests : SenTestCase
+
 @end

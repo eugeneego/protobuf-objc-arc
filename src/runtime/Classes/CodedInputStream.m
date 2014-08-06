@@ -35,12 +35,9 @@ const int32_t DEFAULT_RECURSION_LIMIT = 64;
 const int32_t DEFAULT_SIZE_LIMIT = 64 << 20;  // 64MB
 const int32_t BUFFER_SIZE = 4096;
 
-@synthesize buffer;
-@synthesize input;
-
 - (void)dealloc
 {
-  [input close];
+  [_input close];
 }
 
 - (void)commonInit
@@ -54,7 +51,7 @@ const int32_t BUFFER_SIZE = 4096;
 {
   if((self = [super init])) {
     self.buffer = [NSMutableData dataWithData:data];
-    bufferSize = (int32_t)buffer.length;
+    bufferSize = (int32_t)_buffer.length;
     self.input = nil;
     [self commonInit];
   }
@@ -68,7 +65,7 @@ const int32_t BUFFER_SIZE = 4096;
     self.buffer = [NSMutableData dataWithLength:BUFFER_SIZE];
     bufferSize = 0;
     self.input = input_;
-    [input open];
+    [_input open];
     [self commonInit];
   }
 
@@ -224,7 +221,7 @@ const int32_t BUFFER_SIZE = 4096;
     // Fast path:  We already have the bytes in a contiguous buffer, so
     //   just copy directly from it.
     //  new String(buffer, bufferPos, size, "UTF-8");
-    NSString *result = [[NSString alloc] initWithBytes:(((uint8_t *)buffer.bytes) + bufferPos) length:size encoding:NSUTF8StringEncoding];
+    NSString *result = [[NSString alloc] initWithBytes:(((uint8_t *)_buffer.bytes) + bufferPos) length:size encoding:NSUTF8StringEncoding];
     bufferPos += size;
     return result;
   } else {
@@ -287,7 +284,7 @@ const int32_t BUFFER_SIZE = 4096;
   if(size < bufferSize - bufferPos && size > 0) {
     // Fast path:  We already have the bytes in a contiguous buffer, so
     //   just copy directly from it.
-    NSData *result = [NSData dataWithBytes:(((uint8_t *)buffer.bytes) + bufferPos) length:size];
+    NSData *result = [NSData dataWithBytes:(((uint8_t *)_buffer.bytes) + bufferPos) length:size];
     bufferPos += size;
     return result;
   } else {
@@ -399,8 +396,7 @@ const int32_t BUFFER_SIZE = 4096;
   int8_t b2 = [self readRawByte];
   int8_t b3 = [self readRawByte];
   int8_t b4 = [self readRawByte];
-  return
-    (((int32_t)b1 & 0xff)) |
+  return (((int32_t)b1 & 0xff)) |
     (((int32_t)b2 & 0xff) << 8) |
     (((int32_t)b3 & 0xff) << 16) |
     (((int32_t)b4 & 0xff) << 24);
@@ -417,8 +413,7 @@ const int32_t BUFFER_SIZE = 4096;
   int8_t b6 = [self readRawByte];
   int8_t b7 = [self readRawByte];
   int8_t b8 = [self readRawByte];
-  return
-    (((int64_t)b1 & 0xff)) |
+  return (((int64_t)b1 & 0xff)) |
     (((int64_t)b2 & 0xff) << 8) |
     (((int64_t)b3 & 0xff) << 16) |
     (((int64_t)b4 & 0xff) << 24) |
@@ -573,8 +568,8 @@ const int32_t BUFFER_SIZE = 4096;
   // when there is no more data?
   bufferPos = 0;
   bufferSize = 0;
-  if(input != nil) {
-    bufferSize = (int32_t)[input read:buffer.mutableBytes maxLength:buffer.length];
+  if(_input != nil) {
+    bufferSize = (int32_t)[_input read:_buffer.mutableBytes maxLength:_buffer.length];
   }
 
   if(bufferSize <= 0) {
@@ -605,7 +600,7 @@ const int32_t BUFFER_SIZE = 4096;
   if(bufferPos == bufferSize) {
     [self refillBuffer:YES];
   }
-  int8_t *bytes = (int8_t *)buffer.bytes;
+  int8_t *bytes = (int8_t *)_buffer.bytes;
   return bytes[bufferPos++];
 }
 
@@ -630,7 +625,7 @@ const int32_t BUFFER_SIZE = 4096;
 
   if(size <= bufferSize - bufferPos) {
     // We have all the bytes we need already.
-    NSData *data = [NSData dataWithBytes:(((int8_t *)buffer.bytes) + bufferPos) length:size];
+    NSData *data = [NSData dataWithBytes:(((int8_t *)_buffer.bytes) + bufferPos) length:size];
     bufferPos += size;
     return data;
   } else if(size < BUFFER_SIZE) {
@@ -640,7 +635,7 @@ const int32_t BUFFER_SIZE = 4096;
     // First copy what we have.
     NSMutableData *bytes = [NSMutableData dataWithLength:size];
     int32_t pos = bufferSize - bufferPos;
-    memcpy(bytes.mutableBytes, ((int8_t *)buffer.bytes) + bufferPos, pos);
+    memcpy(bytes.mutableBytes, ((int8_t *)_buffer.bytes) + bufferPos, pos);
     bufferPos = bufferSize;
 
     // We want to use refillBuffer() and then copy from the buffer into our
@@ -649,13 +644,13 @@ const int32_t BUFFER_SIZE = 4096;
     [self refillBuffer:YES];
 
     while(size - pos > bufferSize) {
-      memcpy(((int8_t *)bytes.mutableBytes) + pos, buffer.bytes, bufferSize);
+      memcpy(((int8_t *)bytes.mutableBytes) + pos, _buffer.bytes, bufferSize);
       pos += bufferSize;
       bufferPos = bufferSize;
       [self refillBuffer:YES];
     }
 
-    memcpy(((int8_t *)bytes.mutableBytes) + pos, buffer.bytes, size - pos);
+    memcpy(((int8_t *)bytes.mutableBytes) + pos, _buffer.bytes, size - pos);
     bufferPos = size - pos;
 
     return bytes;
@@ -688,8 +683,8 @@ const int32_t BUFFER_SIZE = 4096;
       int32_t pos = 0;
       while(pos < chunk.length) {
         int32_t n = 0;
-        if(input != nil) {
-          n = (int32_t)[input read:(((uint8_t *)chunk.mutableBytes) + pos) maxLength:chunk.length - pos];
+        if(_input != nil) {
+          n = (int32_t)[_input read:(((uint8_t *)chunk.mutableBytes) + pos) maxLength:chunk.length - pos];
         }
         if(n <= 0) {
           @throw [NSException exceptionWithName:@"InvalidProtocolBuffer" reason:@"truncatedMessage" userInfo:nil];
@@ -706,7 +701,7 @@ const int32_t BUFFER_SIZE = 4096;
 
     // Start by copying the leftover bytes from this.buffer.
     int32_t pos = originalBufferSize - originalBufferPos;
-    memcpy(bytes.mutableBytes, ((int8_t *)buffer.bytes) + originalBufferPos, pos);
+    memcpy(bytes.mutableBytes, ((int8_t *)_buffer.bytes) + originalBufferPos, pos);
 
     // And now all the chunks.
     for(NSData *chunk in chunks) {
@@ -751,7 +746,7 @@ const int32_t BUFFER_SIZE = 4096;
     // Then skip directly from the InputStream for the rest.
     while(pos < size) {
       NSMutableData *data = [NSMutableData dataWithLength:(size - pos)];
-      int32_t n = (input == nil) ? -1 : (int32_t)[input read:data.mutableBytes maxLength:(size - pos)];
+      int32_t n = (_input == nil) ? -1 : (int32_t)[_input read:data.mutableBytes maxLength:(size - pos)];
       if(n <= 0) {
         @throw [NSException exceptionWithName:@"InvalidProtocolBuffer" reason:@"truncatedMessage" userInfo:nil];
       }

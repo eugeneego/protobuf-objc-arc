@@ -17,9 +17,11 @@
 
 #import "UtilitiesTests.h"
 #import "ProtocolBuffers.h"
+
 @implementation UtilitiesTests
 
-- (void) testRightShiftFunctions {
+- (void)testRightShiftFunctions
+{
   STAssertEquals((1UL << 31) >> 31, 1UL, nil);
   STAssertEquals((1 << 31) >> 31, -1, nil);
   STAssertEquals((1ULL << 63) >> 63, 1ULL, nil);

@@ -112,8 +112,7 @@
   return YES;
 }
 
-- (NSUInteger)hashExtensionsFrom:(int32_t)startInclusive
-  to:(int32_t)endExclusive
+- (NSUInteger)hashExtensionsFrom:(int32_t)startInclusive to:(int32_t)endExclusive
 {
   NSUInteger hashCode = 0;
   NSArray *sortedKeys = [_extensionMap.allKeys sortedArrayUsingSelector:@selector(compare:)];
@@ -136,6 +135,98 @@
     size += [extension computeSerializedSizeIncludingTag:value];
   }
   return size;
+}
+
+#pragma mark - Setters
+
+- (void)setExtension:(id<PBExtensionField>)extension value:(id)value
+{
+  [self ensureExtensionIsRegistered:extension];
+
+  if([extension isRepeated]) {
+    @throw [NSException exceptionWithName:@"IllegalArgument" reason:@"Must call addExtension() for repeated types." userInfo:nil];
+  }
+
+  if(self.extensionMap == nil) {
+    self.extensionMap = [NSMutableDictionary dictionary];
+  }
+  self.extensionMap[@([extension fieldNumber])] = value;
+}
+
+- (void)addExtension:(id<PBExtensionField>)extension value:(id)value
+{
+  [self ensureExtensionIsRegistered:extension];
+
+  if(![extension isRepeated]) {
+    @throw [NSException exceptionWithName:@"IllegalArgument" reason:@"Must call setExtension() for singular types." userInfo:nil];
+  }
+
+  if(self.extensionMap == nil) {
+    self.extensionMap = [NSMutableDictionary dictionary];
+  }
+  NSNumber *fieldNumber = @([extension fieldNumber]);
+  NSMutableArray *list = self.extensionMap[fieldNumber];
+  if(list == nil) {
+    list = [NSMutableArray array];
+    self.extensionMap[fieldNumber] = list;
+  }
+
+  [list addObject:value];
+}
+
+- (void)setExtension:(id<PBExtensionField>)extension index:(int32_t)index value:(id)value
+{
+  [self ensureExtensionIsRegistered:extension];
+
+  if(![extension isRepeated]) {
+    @throw [NSException exceptionWithName:@"IllegalArgument" reason:@"Must call setExtension() for singular types." userInfo:nil];
+  }
+
+  if(self.extensionMap == nil) {
+    self.extensionMap = [NSMutableDictionary dictionary];
+  }
+
+  NSNumber *fieldNumber = @([extension fieldNumber]);
+  NSMutableArray *list = self.extensionMap[fieldNumber];
+
+  list[(NSUInteger)index] = value;
+}
+
+- (void)clearExtension:(id<PBExtensionField>)extension
+{
+  [self ensureExtensionIsRegistered:extension];
+  [self.extensionMap removeObjectForKey:@([extension fieldNumber])];
+}
+
+- (void)mergeExtensionFields:(PBExtendableMessage *)other
+{
+  if([self class] != [other class]) {
+    @throw [NSException exceptionWithName:@"IllegalArgument" reason:@"Cannot merge extensions from a different type" userInfo:nil];
+  }
+
+  if(other.extensionMap.count > 0) {
+    if(self.extensionMap == nil) {
+      self.extensionMap = [NSMutableDictionary dictionary];
+    }
+
+    NSDictionary *registry = other.extensionRegistry;
+    for(NSNumber *fieldNumber in other.extensionMap) {
+      id<PBExtensionField> thisField = registry[fieldNumber];
+      id value = other.extensionMap[fieldNumber];
+
+      if([thisField isRepeated]) {
+        NSMutableArray *list = self.extensionMap[fieldNumber];
+        if(list == nil) {
+          list = [NSMutableArray array];
+          self.extensionMap[fieldNumber] = list;
+        }
+
+        [list addObjectsFromArray:value];
+      } else {
+        self.extensionMap[fieldNumber] = value;
+      }
+    }
+  }
 }
 
 @end

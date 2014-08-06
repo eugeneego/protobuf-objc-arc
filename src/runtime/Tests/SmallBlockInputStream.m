@@ -17,52 +17,45 @@
 
 #import "SmallBlockInputStream.h"
 
-
 @implementation SmallBlockInputStream
 
-@synthesize underlyingStream;
-
-
-- (id) initWithData:(NSData*) data_
-          blockSize:(int32_t) blockSize_ {
-  if ((self = [super init])) {
+- (id)initWithData:(NSData *)data_ blockSize:(int32_t)blockSize_
+{
+  if((self = [super init])) {
     self.underlyingStream = [NSInputStream inputStreamWithData:data_];
     blockSize = blockSize_;
   }
-
   return self;
 }
 
-
-+ (SmallBlockInputStream*) streamWithData:(NSData*) data
-                                blockSize:(int32_t) blockSize {
-  return [[SmallBlockInputStream alloc] initWithData:data
-                                            blockSize:blockSize] ;
++ (SmallBlockInputStream *)streamWithData:(NSData *)data blockSize:(int32_t)blockSize
+{
+  return [[SmallBlockInputStream alloc] initWithData:data blockSize:blockSize];
 }
 
-- (void)open {
-  [underlyingStream open];
+- (void)open
+{
+  [_underlyingStream open];
 }
 
-
-- (void) close {
-  [underlyingStream close];
+- (void)close
+{
+  [_underlyingStream close];
 }
 
-
-- (NSInteger) read:(uint8_t*) buffer
-         maxLength:(NSUInteger) len {
-  return [underlyingStream read:buffer maxLength:MIN(len, blockSize)];
+- (NSInteger)read:(uint8_t *)buffer maxLength:(NSUInteger)len
+{
+  return [_underlyingStream read:buffer maxLength:MIN(len, blockSize)];
 }
 
-
-- (BOOL) getBuffer:(uint8_t**) buffer length:(NSUInteger*)len {
-  return [underlyingStream getBuffer:buffer length:len];
+- (BOOL)getBuffer:(uint8_t **)buffer length:(NSUInteger *)len
+{
+  return [_underlyingStream getBuffer:buffer length:len];
 }
 
-
-- (BOOL) hasBytesAvailable {
-  return underlyingStream.hasBytesAvailable;
+- (BOOL)hasBytesAvailable
+{
+  return _underlyingStream.hasBytesAvailable;
 }
 
 @end

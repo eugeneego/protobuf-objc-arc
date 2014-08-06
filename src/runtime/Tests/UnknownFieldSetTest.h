@@ -21,22 +21,14 @@
 @class TestAllTypes;
 @class TestEmptyMessage;
 
-@interface UnknownFieldSetTest : SenTestCase {
-  TestAllTypes* allFields;
-  NSData* allFieldsData;
+@interface UnknownFieldSetTest : SenTestCase
 
-  // An empty message that has been parsed from allFieldsData.  So, it has
-  // unknown fields of every type.
-  TestEmptyMessage* emptyMessage;
-  PBUnknownFieldSet* unknownFields;
-}
-
-@property (strong) TestAllTypes* allFields;
-@property (strong) NSData* allFieldsData;
+@property (strong) TestAllTypes *allFields;
+@property (strong) NSData *allFieldsData;
 
 // An empty message that has been parsed from allFieldsData.  So, it has
 // unknown fields of every type.
-@property (strong) TestEmptyMessage* emptyMessage;
-@property (strong) PBUnknownFieldSet* unknownFields;
+@property (strong) TestEmptyMessage *emptyMessage;
+@property (strong) PBUnknownFieldSet *unknownFields;
 
 @end

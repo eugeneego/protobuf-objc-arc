@@ -73,4 +73,11 @@
 // @internal
 - (void)ensureExtensionIsRegistered:(id<PBExtensionField>)extension;
 
+// Setters
+- (void)setExtension:(id<PBExtensionField>)extension value:(id)value;
+- (void)addExtension:(id<PBExtensionField>)extension value:(id)value;
+- (void)setExtension:(id<PBExtensionField>)extension index:(int32_t)index value:(id)value;
+- (void)clearExtension:(id<PBExtensionField>)extension;
+- (void)mergeExtensionFields:(PBExtendableMessage *)other;
+
 @end
