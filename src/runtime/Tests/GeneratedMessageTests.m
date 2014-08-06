@@ -22,85 +22,67 @@
 
 @implementation GeneratedMessageTests
 
-- (void) testDefaultInstance {
-  STAssertTrue([TestAllTypes defaultInstance] ==
-               [[TestAllTypes defaultInstance] defaultInstance], @"");
-  STAssertTrue([TestAllTypes defaultInstance] ==
-               [[TestAllTypes builder] defaultInstance], @"");
-}
-
-
-- (void) testAccessors {
-  TestAllTypes_Builder* builder = [TestAllTypes builder];
+- (void)testAccessors
+{
+  TestAllTypes_Builder *builder = [TestAllTypes builder];
   [TestUtilities setAllFields:builder];
-  TestAllTypes* message = [builder build];
+  TestAllTypes *message = [builder build];
   [TestUtilities assertAllFieldsSet:message];
 }
 
+- (void)testRepeatedAppend
+{
+  TestAllTypes_Builder *builder = [TestAllTypes builder];
 
-- (void) testRepeatedAppend {
-  TestAllTypes_Builder* builder = [TestAllTypes builder];
-
-  NSArray* array =
-  [NSArray arrayWithObjects:
-   [NSNumber numberWithInt:1],
-   [NSNumber numberWithInt:2],
-   [NSNumber numberWithInt:3],
-   [NSNumber numberWithInt:4], nil];
+  NSArray *array = @[ @1, @2, @3, @4 ];
 
   [builder setRepeatedInt32Array:array];
-  [builder setRepeatedForeignEnumArray:
-   [NSArray arrayWithObject:
-    [NSNumber numberWithInt:ForeignEnumForeignBaz]]];
+  [builder setRepeatedForeignEnumArray:@[ @(ForeignEnumForeignBaz) ]];
 
-  ForeignMessage* foreignMessage = [[[ForeignMessage builder] setC:12] build];
-  [builder setRepeatedForeignMessageArray:[NSArray arrayWithObject:foreignMessage]];
+  ForeignMessage *foreignMessage = [[[ForeignMessage builder] setC:12] build];
+  [builder setRepeatedForeignMessageArray:@[ foreignMessage ]];
 
-  TestAllTypes* message = [builder build];
+  TestAllTypes *message = [builder build];
   STAssertTrue(1 == message.repeatedForeignMessage.count, @"");
   STAssertTrue(12 == [[message repeatedForeignMessageAtIndex:0] c], @"");
 }
 
-
-- (void) testClearExtension {
+- (void)testClearExtension
+{
   // clearExtension() is not actually used in TestUtil, so try it manually.
-  PBExtendableMessage_Builder* builder1 =
-  [[TestAllExtensions builder]
-   setExtension:[UnittestRoot optionalInt32Extension] value:[NSNumber numberWithInt:1]];
+  PBExtendableMessage_Builder *builder1 = [[TestAllExtensions builder] setExtension:[UnittestRoot optionalInt32Extension] value:@1];
 
   STAssertTrue([builder1 hasExtension:[UnittestRoot optionalInt32Extension]], @"");
   [builder1 clearExtension:[UnittestRoot optionalInt32Extension]];
   STAssertFalse([builder1 hasExtension:[UnittestRoot optionalInt32Extension]], @"");
 
-  PBExtendableMessage_Builder* builder2 =
-  [[TestAllExtensions builder]
-   addExtension:[UnittestRoot repeatedInt32Extension] value:[NSNumber numberWithInt:1]];
+  PBExtendableMessage_Builder *builder2 = [[TestAllExtensions builder] addExtension:[UnittestRoot repeatedInt32Extension] value:@1];
 
   STAssertTrue(1 == [[builder2 getExtension:[UnittestRoot repeatedInt32Extension]] count], @"");
   [builder2 clearExtension:[UnittestRoot repeatedInt32Extension]];
   STAssertTrue(0 == [[builder2 getExtension:[UnittestRoot repeatedInt32Extension]] count], @"");
 }
 
-
-- (void) testExtensionAccessors {
-  TestAllExtensions_Builder* builder = [TestAllExtensions builder];
+- (void)testExtensionAccessors
+{
+  TestAllExtensions_Builder *builder = [TestAllExtensions builder];
   [TestUtilities setAllExtensions:builder];
-  TestAllExtensions* message = [builder build];
+  TestAllExtensions *message = [builder build];
   [TestUtilities assertAllExtensionsSet:message];
 }
 
-
-- (void) testExtensionRepeatedSetters {
-  TestAllExtensions_Builder* builder = [TestAllExtensions builder];
+- (void)testExtensionRepeatedSetters
+{
+  TestAllExtensions_Builder *builder = [TestAllExtensions builder];
   [TestUtilities setAllExtensions:builder];
   [TestUtilities modifyRepeatedExtensions:builder];
-  TestAllExtensions* message = [builder build];
+  TestAllExtensions *message = [builder build];
   [TestUtilities assertRepeatedExtensionsModified:message];
 }
 
-
-- (void) testExtensionDefaults {
-  [TestUtilities assertExtensionsClear:[TestAllExtensions defaultInstance]];
+- (void)testExtensionDefaults
+{
+  [TestUtilities assertExtensionsClear:[[TestAllExtensions alloc] init]];
   [TestUtilities assertExtensionsClear:[[TestAllExtensions builder] build]];
 }
 

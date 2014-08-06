@@ -28,31 +28,30 @@
 @class PBExtensionRegistry;
 @class PBMutableExtensionRegistry;
 
-@interface TestUtilities : SenTestCase {
-}
+@interface TestUtilities : SenTestCase
 
-+ (void) setAllFields:(TestAllTypes_Builder*) message;
-+ (void) setAllExtensions:(TestAllExtensions_Builder*) message;
-+ (void) setPackedFields:(TestPackedTypes_Builder*) message;
-+ (void) setPackedExtensions:(TestPackedExtensions_Builder*) message;
-+ (void) registerAllExtensions:(PBMutableExtensionRegistry*) registry;
++ (void)setAllFields:(TestAllTypes_Builder *)message;
++ (void)setAllExtensions:(TestAllExtensions_Builder *)message;
++ (void)setPackedFields:(TestPackedTypes_Builder *)message;
++ (void)setPackedExtensions:(TestPackedExtensions_Builder *)message;
++ (void)registerAllExtensions:(PBMutableExtensionRegistry *)registry;
 
-+ (TestAllTypes*) allSet;
-+ (TestAllExtensions*) allExtensionsSet;
-+ (TestPackedTypes*) packedSet;
-+ (TestPackedExtensions*) packedExtensionsSet;
++ (TestAllTypes *)allSet;
++ (TestAllExtensions *)allExtensionsSet;
++ (TestPackedTypes *)packedSet;
++ (TestPackedExtensions *)packedExtensionsSet;
 
-+ (void) assertAllFieldsSet:(TestAllTypes*) message;
-+ (void) assertAllExtensionsSet:(TestAllExtensions*) message;
-+ (void) assertRepeatedExtensionsModified:(TestAllExtensions*) message;
-+ (void) assertExtensionsClear:(TestAllExtensions*) message;
-+ (void) assertPackedFieldsSet:(TestPackedTypes*) message;
-+ (void) assertPackedExtensionsSet:(TestPackedExtensions*) message;
++ (void)assertAllFieldsSet:(TestAllTypes *)message;
++ (void)assertAllExtensionsSet:(TestAllExtensions *)message;
++ (void)assertRepeatedExtensionsModified:(TestAllExtensions *)message;
++ (void)assertExtensionsClear:(TestAllExtensions *)message;
++ (void)assertPackedFieldsSet:(TestPackedTypes *)message;
++ (void)assertPackedExtensionsSet:(TestPackedExtensions *)message;
 
-+ (void) modifyRepeatedExtensions:(TestAllExtensions_Builder*) message;
++ (void)modifyRepeatedExtensions:(TestAllExtensions_Builder *)message;
 
-+ (PBExtensionRegistry*) extensionRegistry;
++ (PBExtensionRegistry *)extensionRegistry;
 
-+ (NSData*) goldenData;
++ (NSData *)goldenData;
 
 @end

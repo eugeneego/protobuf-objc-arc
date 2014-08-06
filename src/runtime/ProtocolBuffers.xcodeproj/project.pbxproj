@@ -72,22 +72,33 @@
 		0537053A14A1949300F18F4E /* GeneratedMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704D514A1779300F18F4E /* GeneratedMessageTests.m */; };
 		0537053B14A1949300F18F4E /* MessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704D714A1779300F18F4E /* MessageTests.m */; };
 		0537053C14A1949300F18F4E /* MicroTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704D914A1779300F18F4E /* MicroTest.m */; };
-		0537053D14A1949300F18F4E /* UnittestCustomOptions.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704DE14A1779400F18F4E /* UnittestCustomOptions.pb.m */; };
-		0537053E14A1949300F18F4E /* UnittestEmbedOptimizeFor.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704E014A1779400F18F4E /* UnittestEmbedOptimizeFor.pb.m */; };
-		0537053F14A1949300F18F4E /* UnittestEmpty.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704E214A1779400F18F4E /* UnittestEmpty.pb.m */; };
-		0537054014A1949300F18F4E /* UnittestEnormousDescriptor.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704E414A1779400F18F4E /* UnittestEnormousDescriptor.pb.m */; };
-		0537054114A1949300F18F4E /* UnittestImport.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704E614A1779600F18F4E /* UnittestImport.pb.m */; };
-		0537054214A1949300F18F4E /* UnittestImportLite.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704E814A1779600F18F4E /* UnittestImportLite.pb.m */; };
-		0537054314A1949300F18F4E /* UnittestLite.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704EA14A1779600F18F4E /* UnittestLite.pb.m */; };
-		0537054414A1949300F18F4E /* UnittestLiteImportsNonlite.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704EC14A1779600F18F4E /* UnittestLiteImportsNonlite.pb.m */; };
-		0537054514A1949300F18F4E /* UnittestMset.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704EE14A1779600F18F4E /* UnittestMset.pb.m */; };
-		0537054614A1949400F18F4E /* UnittestNoGenericServices.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704F014A1779600F18F4E /* UnittestNoGenericServices.pb.m */; };
-		0537054714A1949400F18F4E /* UnittestOptimizeFor.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704F214A1779700F18F4E /* UnittestOptimizeFor.pb.m */; };
 		0537054814A1949400F18F4E /* UnknownFieldSetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704F414A1779700F18F4E /* UnknownFieldSetTest.m */; };
 		0537054914A1949400F18F4E /* UtilitiesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704F614A1779700F18F4E /* UtilitiesTests.m */; };
 		0537054A14A1949400F18F4E /* WireFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 053704F814A1779700F18F4E /* WireFormatTests.m */; };
 		0537058B14A1BD7700F18F4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0537044114A176C100F18F4E /* Foundation.framework */; };
 		053CE45514A2B655008471AB /* libProtocolBuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0537043E14A176C100F18F4E /* libProtocolBuffers.a */; };
+		B2FA80778F97D308D27D5F9B /* Unittest_no_generic_services.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA800BEFD47217184FDD22 /* Unittest_no_generic_services.pb.m */; };
+		B2FA816E4FA6BC569F476DBB /* Unittest_import.pb.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8A5E94E1DA13B7977717 /* Unittest_import.pb.h */; };
+		B2FA8238C7D41E11EC32D794 /* Unittest_optimize_for.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA87B1B414229F37D57E5C /* Unittest_optimize_for.pb.m */; };
+		B2FA82429536D0C24BD75FE6 /* Unittest_embed_optimize_for.pb.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8629FA0D238D1FA24C81 /* Unittest_embed_optimize_for.pb.h */; };
+		B2FA82776F63357221E4D253 /* Unittest_empty.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA85388A0FE7D0E17C5CAE /* Unittest_empty.pb.m */; };
+		B2FA82CE4C70D645CE08DA5D /* Unittest_empty.pb.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8E4B7B6AAE5A4B636B87 /* Unittest_empty.pb.h */; };
+		B2FA82E14FFEE654A07BC593 /* Unittest_lite.pb.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8099D8CFC3AB7E236ADD /* Unittest_lite.pb.h */; };
+		B2FA84634C0CA694254875F7 /* Unittest_enormous_descriptor.pb.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8B828AC7D45876F6795C /* Unittest_enormous_descriptor.pb.h */; };
+		B2FA84C8DD4975958368403F /* Unittest_custom_options.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA888A857AAD0B235439AB /* Unittest_custom_options.pb.m */; };
+		B2FA85A5F924B1105C443145 /* Unittest_lite_imports_nonlite.pb.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA88F3F3DDA87FDA8822B8 /* Unittest_lite_imports_nonlite.pb.h */; };
+		B2FA898B0B421F8247D925E2 /* Unittest_mset.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA834EA69B939889176212 /* Unittest_mset.pb.m */; };
+		B2FA89FB89996A68B5FD7D91 /* Unittest_embed_optimize_for.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA8A3E8C411636DB20F6EA /* Unittest_embed_optimize_for.pb.m */; };
+		B2FA8B5DC84DF5E5B292868E /* Unittest_lite_imports_nonlite.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA881DBB0DEB58FB3FFD7A /* Unittest_lite_imports_nonlite.pb.m */; };
+		B2FA8BA2A8C8A14FEF438E06 /* Unittest_no_generic_services.pb.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8ABEC576B6E2FD88A0C0 /* Unittest_no_generic_services.pb.h */; };
+		B2FA8BAAD0ED6C3E1DBE7C40 /* Unittest_import_lite.pb.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA80779CF65541AC7B8FF1 /* Unittest_import_lite.pb.h */; };
+		B2FA8C3D3A58AC94959FCE85 /* Unittest_mset.pb.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA89E31B0336990B19F5A5 /* Unittest_mset.pb.h */; };
+		B2FA8D0869DB0B7E43E49094 /* Unittest_import_lite.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA8F347D87722921627B5A /* Unittest_import_lite.pb.m */; };
+		B2FA8E3278C6F508B51EC90D /* Unittest_import.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA854E99105566BF187E07 /* Unittest_import.pb.m */; };
+		B2FA8E6CDEDA8E6EB855C4CF /* Unittest_enormous_descriptor.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA8652DA18A51F9D0824EE /* Unittest_enormous_descriptor.pb.m */; };
+		B2FA8F6DEBC6F59E4A4FA026 /* Unittest_custom_options.pb.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8BF2DAEA86887722B72B /* Unittest_custom_options.pb.h */; };
+		B2FA8F99C255A52B95413D4F /* Unittest_optimize_for.pb.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8EBC0FFA50028755A9BD /* Unittest_optimize_for.pb.h */; };
+		B2FA8FD2C0F50AFEBEDA8CF6 /* Unittest_lite.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA8365089DAFFD8C3C6491 /* Unittest_lite.pb.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,34 +192,34 @@
 		053704DA14A1779300F18F4E /* SmallBlockInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallBlockInputStream.h; sourceTree = "<group>"; };
 		053704DB14A1779300F18F4E /* TestUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestUtilities.h; sourceTree = "<group>"; };
 		053704DC14A1779300F18F4E /* Unittest.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unittest.pb.h; sourceTree = "<group>"; };
-		053704DD14A1779400F18F4E /* UnittestCustomOptions.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnittestCustomOptions.pb.h; sourceTree = "<group>"; };
-		053704DE14A1779400F18F4E /* UnittestCustomOptions.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnittestCustomOptions.pb.m; sourceTree = "<group>"; };
-		053704DF14A1779400F18F4E /* UnittestEmbedOptimizeFor.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnittestEmbedOptimizeFor.pb.h; sourceTree = "<group>"; };
-		053704E014A1779400F18F4E /* UnittestEmbedOptimizeFor.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnittestEmbedOptimizeFor.pb.m; sourceTree = "<group>"; };
-		053704E114A1779400F18F4E /* UnittestEmpty.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnittestEmpty.pb.h; sourceTree = "<group>"; };
-		053704E214A1779400F18F4E /* UnittestEmpty.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnittestEmpty.pb.m; sourceTree = "<group>"; };
-		053704E314A1779400F18F4E /* UnittestEnormousDescriptor.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnittestEnormousDescriptor.pb.h; sourceTree = "<group>"; };
-		053704E414A1779400F18F4E /* UnittestEnormousDescriptor.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnittestEnormousDescriptor.pb.m; sourceTree = "<group>"; };
-		053704E514A1779600F18F4E /* UnittestImport.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnittestImport.pb.h; sourceTree = "<group>"; };
-		053704E614A1779600F18F4E /* UnittestImport.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnittestImport.pb.m; sourceTree = "<group>"; };
-		053704E714A1779600F18F4E /* UnittestImportLite.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnittestImportLite.pb.h; sourceTree = "<group>"; };
-		053704E814A1779600F18F4E /* UnittestImportLite.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnittestImportLite.pb.m; sourceTree = "<group>"; };
-		053704E914A1779600F18F4E /* UnittestLite.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnittestLite.pb.h; sourceTree = "<group>"; };
-		053704EA14A1779600F18F4E /* UnittestLite.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnittestLite.pb.m; sourceTree = "<group>"; };
-		053704EB14A1779600F18F4E /* UnittestLiteImportsNonlite.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnittestLiteImportsNonlite.pb.h; sourceTree = "<group>"; };
-		053704EC14A1779600F18F4E /* UnittestLiteImportsNonlite.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnittestLiteImportsNonlite.pb.m; sourceTree = "<group>"; };
-		053704ED14A1779600F18F4E /* UnittestMset.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnittestMset.pb.h; sourceTree = "<group>"; };
-		053704EE14A1779600F18F4E /* UnittestMset.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnittestMset.pb.m; sourceTree = "<group>"; };
-		053704EF14A1779600F18F4E /* UnittestNoGenericServices.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnittestNoGenericServices.pb.h; sourceTree = "<group>"; };
-		053704F014A1779600F18F4E /* UnittestNoGenericServices.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnittestNoGenericServices.pb.m; sourceTree = "<group>"; };
-		053704F114A1779600F18F4E /* UnittestOptimizeFor.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnittestOptimizeFor.pb.h; sourceTree = "<group>"; };
-		053704F214A1779700F18F4E /* UnittestOptimizeFor.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnittestOptimizeFor.pb.m; sourceTree = "<group>"; };
 		053704F314A1779700F18F4E /* UnknownFieldSetTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnknownFieldSetTest.h; sourceTree = "<group>"; };
 		053704F414A1779700F18F4E /* UnknownFieldSetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnknownFieldSetTest.m; sourceTree = "<group>"; };
 		053704F514A1779700F18F4E /* UtilitiesTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilitiesTests.h; sourceTree = "<group>"; };
 		053704F614A1779700F18F4E /* UtilitiesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilitiesTests.m; sourceTree = "<group>"; };
 		053704F714A1779700F18F4E /* WireFormatTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WireFormatTests.h; sourceTree = "<group>"; };
 		053704F814A1779700F18F4E /* WireFormatTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WireFormatTests.m; sourceTree = "<group>"; };
+		B2FA800BEFD47217184FDD22 /* Unittest_no_generic_services.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unittest_no_generic_services.pb.m; sourceTree = "<group>"; };
+		B2FA80779CF65541AC7B8FF1 /* Unittest_import_lite.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unittest_import_lite.pb.h; sourceTree = "<group>"; };
+		B2FA8099D8CFC3AB7E236ADD /* Unittest_lite.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unittest_lite.pb.h; sourceTree = "<group>"; };
+		B2FA834EA69B939889176212 /* Unittest_mset.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unittest_mset.pb.m; sourceTree = "<group>"; };
+		B2FA8365089DAFFD8C3C6491 /* Unittest_lite.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unittest_lite.pb.m; sourceTree = "<group>"; };
+		B2FA85388A0FE7D0E17C5CAE /* Unittest_empty.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unittest_empty.pb.m; sourceTree = "<group>"; };
+		B2FA854E99105566BF187E07 /* Unittest_import.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unittest_import.pb.m; sourceTree = "<group>"; };
+		B2FA8629FA0D238D1FA24C81 /* Unittest_embed_optimize_for.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unittest_embed_optimize_for.pb.h; sourceTree = "<group>"; };
+		B2FA8652DA18A51F9D0824EE /* Unittest_enormous_descriptor.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unittest_enormous_descriptor.pb.m; sourceTree = "<group>"; };
+		B2FA87B1B414229F37D57E5C /* Unittest_optimize_for.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unittest_optimize_for.pb.m; sourceTree = "<group>"; };
+		B2FA881DBB0DEB58FB3FFD7A /* Unittest_lite_imports_nonlite.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unittest_lite_imports_nonlite.pb.m; sourceTree = "<group>"; };
+		B2FA888A857AAD0B235439AB /* Unittest_custom_options.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unittest_custom_options.pb.m; sourceTree = "<group>"; };
+		B2FA88F3F3DDA87FDA8822B8 /* Unittest_lite_imports_nonlite.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unittest_lite_imports_nonlite.pb.h; sourceTree = "<group>"; };
+		B2FA89E31B0336990B19F5A5 /* Unittest_mset.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unittest_mset.pb.h; sourceTree = "<group>"; };
+		B2FA8A3E8C411636DB20F6EA /* Unittest_embed_optimize_for.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unittest_embed_optimize_for.pb.m; sourceTree = "<group>"; };
+		B2FA8A5E94E1DA13B7977717 /* Unittest_import.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unittest_import.pb.h; sourceTree = "<group>"; };
+		B2FA8ABEC576B6E2FD88A0C0 /* Unittest_no_generic_services.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unittest_no_generic_services.pb.h; sourceTree = "<group>"; };
+		B2FA8B828AC7D45876F6795C /* Unittest_enormous_descriptor.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unittest_enormous_descriptor.pb.h; sourceTree = "<group>"; };
+		B2FA8BF2DAEA86887722B72B /* Unittest_custom_options.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unittest_custom_options.pb.h; sourceTree = "<group>"; };
+		B2FA8E4B7B6AAE5A4B636B87 /* Unittest_empty.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unittest_empty.pb.h; sourceTree = "<group>"; };
+		B2FA8EBC0FFA50028755A9BD /* Unittest_optimize_for.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unittest_optimize_for.pb.h; sourceTree = "<group>"; };
+		B2FA8F347D87722921627B5A /* Unittest_import_lite.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unittest_import_lite.pb.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,28 +370,6 @@
 				053704DA14A1779300F18F4E /* SmallBlockInputStream.h */,
 				053704DB14A1779300F18F4E /* TestUtilities.h */,
 				053704DC14A1779300F18F4E /* Unittest.pb.h */,
-				053704DD14A1779400F18F4E /* UnittestCustomOptions.pb.h */,
-				053704DE14A1779400F18F4E /* UnittestCustomOptions.pb.m */,
-				053704DF14A1779400F18F4E /* UnittestEmbedOptimizeFor.pb.h */,
-				053704E014A1779400F18F4E /* UnittestEmbedOptimizeFor.pb.m */,
-				053704E114A1779400F18F4E /* UnittestEmpty.pb.h */,
-				053704E214A1779400F18F4E /* UnittestEmpty.pb.m */,
-				053704E314A1779400F18F4E /* UnittestEnormousDescriptor.pb.h */,
-				053704E414A1779400F18F4E /* UnittestEnormousDescriptor.pb.m */,
-				053704E514A1779600F18F4E /* UnittestImport.pb.h */,
-				053704E614A1779600F18F4E /* UnittestImport.pb.m */,
-				053704E714A1779600F18F4E /* UnittestImportLite.pb.h */,
-				053704E814A1779600F18F4E /* UnittestImportLite.pb.m */,
-				053704E914A1779600F18F4E /* UnittestLite.pb.h */,
-				053704EA14A1779600F18F4E /* UnittestLite.pb.m */,
-				053704EB14A1779600F18F4E /* UnittestLiteImportsNonlite.pb.h */,
-				053704EC14A1779600F18F4E /* UnittestLiteImportsNonlite.pb.m */,
-				053704ED14A1779600F18F4E /* UnittestMset.pb.h */,
-				053704EE14A1779600F18F4E /* UnittestMset.pb.m */,
-				053704EF14A1779600F18F4E /* UnittestNoGenericServices.pb.h */,
-				053704F014A1779600F18F4E /* UnittestNoGenericServices.pb.m */,
-				053704F114A1779600F18F4E /* UnittestOptimizeFor.pb.h */,
-				053704F214A1779700F18F4E /* UnittestOptimizeFor.pb.m */,
 				053704F314A1779700F18F4E /* UnknownFieldSetTest.h */,
 				053704F414A1779700F18F4E /* UnknownFieldSetTest.m */,
 				053704F514A1779700F18F4E /* UtilitiesTests.h */,
@@ -390,6 +379,28 @@
 				0537045D14A176C100F18F4E /* ProtocolBuffer_iOSTests.h */,
 				0537045E14A176C100F18F4E /* ProtocolBuffer_iOSTests.m */,
 				0537045814A176C100F18F4E /* Supporting Files */,
+				B2FA88F3F3DDA87FDA8822B8 /* Unittest_lite_imports_nonlite.pb.h */,
+				B2FA8652DA18A51F9D0824EE /* Unittest_enormous_descriptor.pb.m */,
+				B2FA854E99105566BF187E07 /* Unittest_import.pb.m */,
+				B2FA8B828AC7D45876F6795C /* Unittest_enormous_descriptor.pb.h */,
+				B2FA8E4B7B6AAE5A4B636B87 /* Unittest_empty.pb.h */,
+				B2FA8BF2DAEA86887722B72B /* Unittest_custom_options.pb.h */,
+				B2FA8EBC0FFA50028755A9BD /* Unittest_optimize_for.pb.h */,
+				B2FA881DBB0DEB58FB3FFD7A /* Unittest_lite_imports_nonlite.pb.m */,
+				B2FA8629FA0D238D1FA24C81 /* Unittest_embed_optimize_for.pb.h */,
+				B2FA8ABEC576B6E2FD88A0C0 /* Unittest_no_generic_services.pb.h */,
+				B2FA87B1B414229F37D57E5C /* Unittest_optimize_for.pb.m */,
+				B2FA80779CF65541AC7B8FF1 /* Unittest_import_lite.pb.h */,
+				B2FA8A5E94E1DA13B7977717 /* Unittest_import.pb.h */,
+				B2FA8365089DAFFD8C3C6491 /* Unittest_lite.pb.m */,
+				B2FA89E31B0336990B19F5A5 /* Unittest_mset.pb.h */,
+				B2FA800BEFD47217184FDD22 /* Unittest_no_generic_services.pb.m */,
+				B2FA834EA69B939889176212 /* Unittest_mset.pb.m */,
+				B2FA85388A0FE7D0E17C5CAE /* Unittest_empty.pb.m */,
+				B2FA8F347D87722921627B5A /* Unittest_import_lite.pb.m */,
+				B2FA8099D8CFC3AB7E236ADD /* Unittest_lite.pb.h */,
+				B2FA888A857AAD0B235439AB /* Unittest_custom_options.pb.m */,
+				B2FA8A3E8C411636DB20F6EA /* Unittest_embed_optimize_for.pb.m */,
 			);
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
@@ -438,6 +449,17 @@
 				053704B914A1773700F18F4E /* MutableExtensionRegistry.h in Headers */,
 				053704A814A1773700F18F4E /* Descriptor.pb.h in Headers */,
 				0527D91714BE7780006562A5 /* ProtocolBuffers-Prefix.pch in Headers */,
+				B2FA85A5F924B1105C443145 /* Unittest_lite_imports_nonlite.pb.h in Headers */,
+				B2FA84634C0CA694254875F7 /* Unittest_enormous_descriptor.pb.h in Headers */,
+				B2FA82CE4C70D645CE08DA5D /* Unittest_empty.pb.h in Headers */,
+				B2FA8F6DEBC6F59E4A4FA026 /* Unittest_custom_options.pb.h in Headers */,
+				B2FA8F99C255A52B95413D4F /* Unittest_optimize_for.pb.h in Headers */,
+				B2FA82429536D0C24BD75FE6 /* Unittest_embed_optimize_for.pb.h in Headers */,
+				B2FA8BA2A8C8A14FEF438E06 /* Unittest_no_generic_services.pb.h in Headers */,
+				B2FA8BAAD0ED6C3E1DBE7C40 /* Unittest_import_lite.pb.h in Headers */,
+				B2FA816E4FA6BC569F476DBB /* Unittest_import.pb.h in Headers */,
+				B2FA8C3D3A58AC94959FCE85 /* Unittest_mset.pb.h in Headers */,
+				B2FA82E14FFEE654A07BC593 /* Unittest_lite.pb.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +583,17 @@
 				053704C314A1773700F18F4E /* UnknownFieldSet.m in Sources */,
 				053704C514A1773700F18F4E /* Utilities.m in Sources */,
 				053704C714A1773700F18F4E /* WireFormat.m in Sources */,
+				B2FA8E6CDEDA8E6EB855C4CF /* Unittest_enormous_descriptor.pb.m in Sources */,
+				B2FA8E3278C6F508B51EC90D /* Unittest_import.pb.m in Sources */,
+				B2FA8B5DC84DF5E5B292868E /* Unittest_lite_imports_nonlite.pb.m in Sources */,
+				B2FA8238C7D41E11EC32D794 /* Unittest_optimize_for.pb.m in Sources */,
+				B2FA8FD2C0F50AFEBEDA8CF6 /* Unittest_lite.pb.m in Sources */,
+				B2FA80778F97D308D27D5F9B /* Unittest_no_generic_services.pb.m in Sources */,
+				B2FA898B0B421F8247D925E2 /* Unittest_mset.pb.m in Sources */,
+				B2FA82776F63357221E4D253 /* Unittest_empty.pb.m in Sources */,
+				B2FA8D0869DB0B7E43E49094 /* Unittest_import_lite.pb.m in Sources */,
+				B2FA84C8DD4975958368403F /* Unittest_custom_options.pb.m in Sources */,
+				B2FA89FB89996A68B5FD7D91 /* Unittest_embed_optimize_for.pb.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,17 +606,6 @@
 				0537053A14A1949300F18F4E /* GeneratedMessageTests.m in Sources */,
 				0537053B14A1949300F18F4E /* MessageTests.m in Sources */,
 				0537053C14A1949300F18F4E /* MicroTest.m in Sources */,
-				0537053D14A1949300F18F4E /* UnittestCustomOptions.pb.m in Sources */,
-				0537053E14A1949300F18F4E /* UnittestEmbedOptimizeFor.pb.m in Sources */,
-				0537053F14A1949300F18F4E /* UnittestEmpty.pb.m in Sources */,
-				0537054014A1949300F18F4E /* UnittestEnormousDescriptor.pb.m in Sources */,
-				0537054114A1949300F18F4E /* UnittestImport.pb.m in Sources */,
-				0537054214A1949300F18F4E /* UnittestImportLite.pb.m in Sources */,
-				0537054314A1949300F18F4E /* UnittestLite.pb.m in Sources */,
-				0537054414A1949300F18F4E /* UnittestLiteImportsNonlite.pb.m in Sources */,
-				0537054514A1949300F18F4E /* UnittestMset.pb.m in Sources */,
-				0537054614A1949400F18F4E /* UnittestNoGenericServices.pb.m in Sources */,
-				0537054714A1949400F18F4E /* UnittestOptimizeFor.pb.m in Sources */,
 				0537054814A1949400F18F4E /* UnknownFieldSetTest.m in Sources */,
 				0537054914A1949400F18F4E /* UtilitiesTests.m in Sources */,
 				0537053714A1949300F18F4E /* CodedInputStreamTests.m in Sources */,
@@ -713,7 +735,6 @@
 		0537046614A176C100F18F4E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -722,7 +743,6 @@
 				GCC_PREFIX_HEADER = "ProtocolBuffers-Prefix.pch";
 				INFOPLIST_FILE = "UnitTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -730,7 +750,6 @@
 		0537046714A176C100F18F4E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -739,7 +758,6 @@
 				GCC_PREFIX_HEADER = "ProtocolBuffers-Prefix.pch";
 				INFOPLIST_FILE = "UnitTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;

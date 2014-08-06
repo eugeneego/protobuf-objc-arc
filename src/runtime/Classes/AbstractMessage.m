@@ -21,75 +21,68 @@
 
 @implementation PBAbstractMessage
 
-- (id) init {
-  if ((self = [super init])) {
+- (id)init
+{
+  if((self = [super init])) {
   }
-
   return self;
 }
 
-
-- (NSData*) data {
-  NSMutableData* data = [NSMutableData dataWithLength:self.serializedSize];
-  PBCodedOutputStream* stream = [PBCodedOutputStream streamWithData:data];
+- (NSData *)data
+{
+  NSMutableData *data = [NSMutableData dataWithLength:self.serializedSize];
+  PBCodedOutputStream *stream = [PBCodedOutputStream streamWithData:data];
   [self writeToCodedOutputStream:stream];
   return data;
 }
 
-
-- (BOOL) isInitialized {
+- (BOOL)isInitialized
+{
   @throw [NSException exceptionWithName:@"ImproperSubclassing" reason:@"" userInfo:nil];
 }
 
-
-- (int32_t) serializedSize {
+- (int32_t)serializedSize
+{
   @throw [NSException exceptionWithName:@"ImproperSubclassing" reason:@"" userInfo:nil];
 }
 
-
-- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+- (void)writeToCodedOutputStream:(PBCodedOutputStream *)output
+{
   @throw [NSException exceptionWithName:@"ImproperSubclassing" reason:@"" userInfo:nil];
 }
 
-
-- (void) writeToOutputStream:(NSOutputStream*) output {
-  PBCodedOutputStream* codedOutput = [PBCodedOutputStream streamWithOutputStream:output];
+- (void)writeToOutputStream:(NSOutputStream *)output
+{
+  PBCodedOutputStream *codedOutput = [PBCodedOutputStream streamWithOutputStream:output];
   [self writeToCodedOutputStream:codedOutput];
   [codedOutput flush];
 }
 
-
-- (id<PBMessage>) defaultInstance {
+- (PBUnknownFieldSet *)unknownFields
+{
   @throw [NSException exceptionWithName:@"ImproperSubclassing" reason:@"" userInfo:nil];
 }
 
-
-- (PBUnknownFieldSet*) unknownFields {
+- (id<PBMessage_Builder>)builder
+{
   @throw [NSException exceptionWithName:@"ImproperSubclassing" reason:@"" userInfo:nil];
 }
 
-
-- (id<PBMessage_Builder>) builder {
+- (id<PBMessage_Builder>)toBuilder
+{
   @throw [NSException exceptionWithName:@"ImproperSubclassing" reason:@"" userInfo:nil];
 }
 
-
-- (id<PBMessage_Builder>) toBuilder {
+- (void)writeDescriptionTo:(NSMutableString *)output withIndent:(NSString *)indent
+{
   @throw [NSException exceptionWithName:@"ImproperSubclassing" reason:@"" userInfo:nil];
 }
 
-
-- (void) writeDescriptionTo:(NSMutableString*) output
-                 withIndent:(NSString*) indent {
-  @throw [NSException exceptionWithName:@"ImproperSubclassing" reason:@"" userInfo:nil];
-}
-
-
-- (NSString*) description {
-  NSMutableString* output = [NSMutableString string];
+- (NSString *)description
+{
+  NSMutableString *output = [NSMutableString string];
   [self writeDescriptionTo:output withIndent:@""];
   return output;
 }
-
 
 @end

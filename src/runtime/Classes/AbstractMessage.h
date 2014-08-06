@@ -18,20 +18,19 @@
 #import "Message.h"
 
 /**
- * A partial implementation of the {@link Message} interface which implements
- * as many methods of that interface as possible in terms of other methods.
- *
- * @author Cyrus Najmabadi
- */
-@interface PBAbstractMessage : NSObject<PBMessage> {
-@private
+* A partial implementation of the {@link Message} interface which implements
+* as many methods of that interface as possible in terms of other methods.
+*
+* @author Cyrus Najmabadi
+*/
+@interface PBAbstractMessage : NSObject<PBMessage>
+{
 }
 
 /**
- * Writes a string description of the message into the given mutable string
- * respecting a given indent.
- */
-- (void)writeDescriptionTo:(NSMutableString*) output
-                withIndent:(NSString*) indent;
+* Writes a string description of the message into the given mutable string
+* respecting a given indent.
+*/
+- (void)writeDescriptionTo:(NSMutableString *)output withIndent:(NSString *)indent;
 
 @end

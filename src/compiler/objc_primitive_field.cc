@@ -19,6 +19,7 @@
 
 #include <map>
 #include <string>
+#include <inttypes.h>
 
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/io/printer.h>
@@ -75,7 +76,6 @@ const char *PrimitiveTypeName(const FieldDescriptor *field)
     default:
       return NULL;
   }
-
   GOOGLE_LOG(FATAL) << "Can't get here.";
   return NULL;
 }
@@ -84,35 +84,34 @@ const char *PrimitiveTypeStringFormat(const FieldDescriptor *field)
 {
   switch(field->type()) {
     case FieldDescriptor::TYPE_INT32:
-      return "%d";
+      return "%"PRId32;
     case FieldDescriptor::TYPE_UINT32:
-      return "%u";
+      return "%"PRIu32;
     case FieldDescriptor::TYPE_SINT32:
-      return "%d";
+      return "%"PRId32;
     case FieldDescriptor::TYPE_FIXED32:
-      return "%u";
+      return "%"PRIu32;
     case FieldDescriptor::TYPE_SFIXED32:
-      return "%u";
+      return "%"PRId32;
     case FieldDescriptor::TYPE_INT64:
-      return "%l";
+      return "%"PRId64;
     case FieldDescriptor::TYPE_UINT64:
-      return "%lu";
+      return "%"PRIu64;
     case FieldDescriptor::TYPE_SINT64:
-      return "%l";
+      return "%"PRId64;
     case FieldDescriptor::TYPE_FIXED64:
-      return "%lu";
+      return "%"PRIu64;
     case FieldDescriptor::TYPE_SFIXED64:
-      return "%l";
+      return "%"PRId64;
     case FieldDescriptor::TYPE_FLOAT:
-      return "%@";
+      return "%f";
     case FieldDescriptor::TYPE_DOUBLE:
-      return "%@";
+      return "%f";
     case FieldDescriptor::TYPE_BOOL:
-      return "%@";
+      return "%d";
     default:
       return "%@";
   }
-
   GOOGLE_LOG(FATAL) << "Can't get here.";
   return NULL;
 }
@@ -155,7 +154,6 @@ const char *GetArrayValueTypeName(const FieldDescriptor *field)
       return "object";
     */
   }
-
   GOOGLE_LOG(FATAL) << "Can't get here.";
   return NULL;
 }
@@ -198,7 +196,6 @@ const char *GetCapitalizedArrayValueTypeName(const FieldDescriptor *field)
       return "Object";
     */
   }
-
   GOOGLE_LOG(FATAL) << "Can't get here.";
   return NULL;
 }
@@ -243,7 +240,6 @@ const char *GetCapitalizedType(const FieldDescriptor *field)
     case FieldDescriptor::TYPE_MESSAGE:
       return "Message";
   }
-
   GOOGLE_LOG(FATAL) << "Can't get here.";
   return NULL;
 }
@@ -277,12 +273,10 @@ int FixedSize(FieldDescriptor::Type type)
       return WireFormatLite::kFloatSize;
     case FieldDescriptor::TYPE_DOUBLE:
       return WireFormatLite::kDoubleSize;
-
     case FieldDescriptor::TYPE_BOOL:
       return WireFormatLite::kBoolSize;
     case FieldDescriptor::TYPE_ENUM:
       return -1;
-
     case FieldDescriptor::TYPE_STRING:
       return -1;
     case FieldDescriptor::TYPE_BYTES:
@@ -291,7 +285,6 @@ int FixedSize(FieldDescriptor::Type type)
       return -1;
     case FieldDescriptor::TYPE_MESSAGE:
       return -1;
-
     // No default because we want the compiler to complain if any new
     // types are added.
   }
@@ -537,7 +530,7 @@ void PrimitiveFieldGenerator::GenerateDescriptionCodeSource(io::Printer *printer
 {
   printer->Print(variables_,
     "if (self.has$capitalized_name$) {\n"
-      "  [output appendFormat:@\"%@%@: %@\\n\", indent, @\"$name$\", ");
+    "  [output appendFormat:@\"%@%@: %@\\n\", indent, @\"$name$\", ");
   printer->Print(variables_,
     BoxValue(descriptor_, "self.$name$").c_str());//RAGY
   printer->Print(variables_,
@@ -650,7 +643,7 @@ void RepeatedPrimitiveFieldGenerator::GenerateBuilderMembersHeader(io::Printer *
     "- ($classname$_Builder *)add$capitalized_name$:($storage_type$)value;\n"
     "- ($classname$_Builder *)set$capitalized_name$Array:(NSArray *)array;\n");
 
-  if(IsObjectArray(descriptor_)) {
+  if(!IsObjectArray(descriptor_)) {
     printer->Print(variables_,
       "- ($classname$_Builder *)set$capitalized_name$Values:(const $storage_type$ *)values count:(NSUInteger)count;\n");
   }
@@ -695,6 +688,9 @@ void RepeatedPrimitiveFieldGenerator::GenerateMembersSource(io::Printer *printer
       "}\n\n"
       "- (void)add$capitalized_name$:($storage_type$)value\n"
       "{\n"
+      "  if (value == nil) {\n"
+      "    return;\n"
+      "  }\n"
       "  if (_$name$ == nil) {\n"
       "    _$name$ = [[NSMutableArray alloc] init];\n"
       "  }\n"
@@ -958,9 +954,9 @@ void RepeatedPrimitiveFieldGenerator::GenerateDescriptionCodeSource(io::Printer 
   if(ReturnsPrimitiveType(descriptor_)) {
     printer->Print(variables_,
       "for (NSUInteger i = 0, listCount = self.$name$.count; i < listCount; i++) {\n"
-      "  [output appendFormat:@\"%@%@: $type_format$\\n\", indent, @\"$name$\", [self.$name$ $array_value_type_name$AtIndex:i]];\n"
+      //"  [output appendFormat:@\"%@%@: $type_format$\\n\", indent, @\"$name$\", [self.$name$ $array_value_type_name$AtIndex:i]];\n"
+      "  [output appendFormat:@\"%@%@: %@\\n\", indent, @\"$name$\", @([self.$name$ $array_value_type_name$AtIndex:i])];\n"
       "}\n");
-    //RAGY need to adjust the string format from %@
   } else {
     printer->Print(variables_,
       "for ($storage_type$ element in self.$name$) {\n"
@@ -982,7 +978,7 @@ void RepeatedPrimitiveFieldGenerator::GenerateHashCodeSource(io::Printer *printe
   if(ReturnsPrimitiveType(descriptor_)) {
     printer->Print(variables_,
       "for (NSUInteger i = 0, listCount = self.$name$.count; i < listCount; i++) {\n"
-      "  hashCode = hashCode * 31 + [self.$name$ $array_value_type_name$AtIndex:i];\n"
+      "  hashCode = hashCode * 31 + [@([self.$name$ $array_value_type_name$AtIndex:i]) hash];\n"
       "}\n");
   } else {
     printer->Print(variables_,

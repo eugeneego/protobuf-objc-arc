@@ -18,14 +18,12 @@
 #import "UnknownFieldSetTest.h"
 #import "WireFormatTests.h"
 
-int main (int argc, const char * argv[]) {
-    @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
-        
-        WireFormatTests* tests = [[WireFormatTests alloc] init] ;
-        [tests testParsePackedExtensions];
-    }
-  
+int main(int argc, const char *argv[])
+{
+  @autoreleasepool {
+    WireFormatTests *tests = [[WireFormatTests alloc] init];
+    [tests testParsePackedExtensions];
+  }
+
   return 0;
 }

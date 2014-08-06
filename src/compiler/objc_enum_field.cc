@@ -237,7 +237,7 @@ void EnumFieldGenerator::GenerateDescriptionCodeSource(io::Printer *printer) con
 {
   printer->Print(variables_,
     "if (self.has$capitalized_name$) {\n"
-    "  [output appendFormat:@\"%@%@: %@\\n\", indent, @\"$name$\", $type$ToString(self.$name$)];\n"
+    "  [output appendFormat:@\"%@%@: %@\\n\", indent, @\"$name$\", $type$ToString(($type$)self.$name$)];\n"
     "}\n");
 }
 
@@ -370,7 +370,7 @@ void RepeatedEnumFieldGenerator::GenerateMembersSource(io::Printer *printer) con
   printer->Print(variables_,
     "- ($type$)$name$AtIndex:(NSUInteger)index\n"
     "{\n"
-    "  return [_$name$ int32AtIndex:index];\n"
+    "  return ($type$)[_$name$ int32AtIndex:index];\n"
     "}\n\n"
     "- (void)add$capitalized_name$:($type$)value\n"
     "{\n"
@@ -541,7 +541,7 @@ void RepeatedEnumFieldGenerator::GenerateDescriptionCodeSource(io::Printer *prin
 {
   printer->Print(variables_,
     "for (NSUInteger i = 0, listCount = self.$name$.count; i < listCount; i++) {\n"
-    "  [output appendFormat:@\"%@%@: %@\\n\", indent, @\"$name$\", $type$ToString([self.$name$ int32AtIndex:i])];\n"
+    "  [output appendFormat:@\"%@%@: %@\\n\", indent, @\"$name$\", $type$ToString(($type$)[self.$name$ int32AtIndex:i])];\n"
     "}\n");
 }
 

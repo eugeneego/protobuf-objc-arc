@@ -20,34 +20,24 @@
 @class PBField;
 @class PBMutableField;
 
-@interface PBUnknownFieldSet_Builder : NSObject <PBMessage_Builder> {
-@private
-  NSMutableDictionary* fields;
+@interface PBUnknownFieldSet_Builder : NSObject<PBMessage_Builder>
 
-  // Optimization:  We keep around a builder for the last field that was
-  //   modified so that we can efficiently add to it multiple times in a
-  //   row (important when parsing an unknown repeated field).
-  int32_t lastFieldNumber;
++ (PBUnknownFieldSet_Builder *)createBuilder:(PBUnknownFieldSet *)unknownFields;
 
-  PBMutableField* lastField;
-}
+- (PBUnknownFieldSet *)build;
+- (PBUnknownFieldSet_Builder *)mergeUnknownFields:(PBUnknownFieldSet *)other;
 
-+ (PBUnknownFieldSet_Builder*) createBuilder:(PBUnknownFieldSet*) unknownFields;
+- (PBUnknownFieldSet_Builder *)mergeFromCodedInputStream:(PBCodedInputStream *)input;
+- (PBUnknownFieldSet_Builder *)mergeFromData:(NSData *)data;
+- (PBUnknownFieldSet_Builder *)mergeFromInputStream:(NSInputStream *)input;
 
-- (PBUnknownFieldSet*) build;
-- (PBUnknownFieldSet_Builder*) mergeUnknownFields:(PBUnknownFieldSet*) other;
+- (PBUnknownFieldSet_Builder *)mergeVarintField:(int32_t)number value:(int32_t)value;
 
-- (PBUnknownFieldSet_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
-- (PBUnknownFieldSet_Builder*) mergeFromData:(NSData*) data;
-- (PBUnknownFieldSet_Builder*) mergeFromInputStream:(NSInputStream*) input;
+- (BOOL)mergeFieldFrom:(int32_t)tag input:(PBCodedInputStream *)input;
 
-- (PBUnknownFieldSet_Builder*) mergeVarintField:(int32_t) number value:(int32_t) value;
+- (PBUnknownFieldSet_Builder *)addField:(PBField *)field forNumber:(int32_t)number;
 
-- (BOOL) mergeFieldFrom:(int32_t) tag input:(PBCodedInputStream*) input;
-
-- (PBUnknownFieldSet_Builder*) addField:(PBField*) field forNumber:(int32_t) number;
-
-- (PBUnknownFieldSet_Builder*) clear;
-- (PBUnknownFieldSet_Builder*) mergeField:(PBField*) field forNumber:(int32_t) number;
+- (PBUnknownFieldSet_Builder *)clear;
+- (PBUnknownFieldSet_Builder *)mergeField:(PBField *)field forNumber:(int32_t)number;
 
 @end

@@ -301,11 +301,6 @@ void MessageGenerator::GenerateMessageHeader(io::Printer *printer)
   }
 
   printer->Print(
-    "+ ($classname$ *)defaultInstance;\n"
-    "- ($classname$ *)defaultInstance;\n",
-    "classname", ClassName(descriptor_));
-
-  printer->Print(
     "\n",
     "fileclass", FileClassName(descriptor_->file()),
     "identifier", UniqueFileScopeIdentifier(descriptor_));
@@ -374,20 +369,6 @@ void MessageGenerator::GenerateSource(io::Printer *printer)
   for(int i = 0; i < descriptor_->extension_count(); i++) {
     ExtensionGenerator(ClassName(descriptor_), descriptor_->extension(i)).GenerateMembersSource(printer);
   }
-
-  printer->Print(
-    "+ (void)initialize\n"
-    "{\n"
-    "}\n\n"
-    "+ ($classname$ *)defaultInstance\n"
-    "{\n"
-    "  return nil;;\n"
-    "}\n\n"
-    "- ($classname$ *)defaultInstance\n"
-    "{\n"
-    "  return nil;\n"
-    "}\n\n",
-    "classname", ClassName(descriptor_));
 
   for(int i = 0; i < descriptor_->field_count(); i++) {
     field_generators_.get(descriptor_->field(i)).GenerateMembersSource(printer);
@@ -503,8 +484,6 @@ void MessageGenerator::GenerateBuilderHeader(io::Printer *printer)
 void MessageGenerator::GenerateCommonBuilderMethodsHeader(io::Printer *printer)
 {
   printer->Print(
-    "\n"
-    "- ($classname$ *)defaultInstance;\n"
     "\n"
     "- ($classname$_Builder *)clear;\n"
     "- ($classname$_Builder *)clone;\n",
@@ -906,10 +885,6 @@ void MessageGenerator::GenerateCommonBuilderMethodsSource(io::Printer *printer)
     "- ($classname$_Builder *)clone\n"
     "{\n"
     "  return [$classname$ builderWithPrototype:_result];\n"
-    "}\n\n"
-    "- ($classname$ *)defaultInstance\n"
-    "{\n"
-    "  return nil;\n"
     "}\n\n",
     "classname", ClassName(descriptor_));
 

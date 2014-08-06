@@ -19,32 +19,26 @@
 @class PBField;
 @class PBUnknownFieldSet_Builder;
 
-@interface PBUnknownFieldSet : NSObject {
-@private
-  NSDictionary* fields;
-}
+@interface PBUnknownFieldSet : NSObject
 
-@property (readonly, strong) NSDictionary* fields;
+@property (readonly, strong) NSDictionary *fields;
 
-+ (PBUnknownFieldSet*) defaultInstance;
++ (PBUnknownFieldSet *)setWithFields:(NSMutableDictionary *)fields;
++ (PBUnknownFieldSet *)parseFromData:(NSData *)data;
 
-+ (PBUnknownFieldSet*) setWithFields:(NSMutableDictionary*) fields;
-+ (PBUnknownFieldSet*) parseFromData:(NSData*) data;
++ (PBUnknownFieldSet_Builder *)builder;
++ (PBUnknownFieldSet_Builder *)builderWithUnknownFields:(PBUnknownFieldSet *)other;
 
-+ (PBUnknownFieldSet_Builder*) builder;
-+ (PBUnknownFieldSet_Builder*) builderWithUnknownFields:(PBUnknownFieldSet*) other;
+- (void)writeAsMessageSetTo:(PBCodedOutputStream *)output;
+- (void)writeToCodedOutputStream:(PBCodedOutputStream *)output;
+- (NSData *)data;
 
-- (void) writeAsMessageSetTo:(PBCodedOutputStream*) output;
-- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output;
-- (NSData*) data;
+- (int32_t)serializedSize;
+- (int32_t)serializedSizeAsMessageSet;
 
-- (int32_t) serializedSize;
-- (int32_t) serializedSizeAsMessageSet;
+- (BOOL)hasField:(int32_t)number;
+- (PBField *)getField:(int32_t)number;
 
-- (BOOL) hasField:(int32_t) number;
-- (PBField*) getField:(int32_t) number;
-
-- (void) writeDescriptionTo:(NSMutableString*) output
-                 withIndent:(NSString*) indent;
+- (void)writeDescriptionTo:(NSMutableString *)output withIndent:(NSString *)indent;
 
 @end

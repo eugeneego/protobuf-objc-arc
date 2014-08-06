@@ -17,11 +17,8 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
+@interface WireFormatTests : SenTestCase
 
-@interface WireFormatTests : SenTestCase {
-
-}
-
-- (void) testParsePackedExtensions;
+- (void)testParsePackedExtensions;
 
 @end
